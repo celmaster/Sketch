@@ -13,8 +13,35 @@
         
     </head>
     <body>
-        <div class="container no-overflow col-8 center card-2" style="min-height: 300px;">
-            <div class="container slide-right-to-left long-duration"> <p>Olá pessoal</p> </div>
+        
+        <div class="vertical-drop-down-menu height-lv12 col-3 overflow-y bg-color-medium-blue" style="position: fixed">
+            <div id="background-menu" class="background-menu"></div>            
+            <div id="menu-top-icon" class="container mobile-device-element menu-top-icon"><p onclick="navPage('#');closeMenu() " class="font-dancing-script text-size-medium">Subir ao topo</p></div>
+            <div id="menu-close-button" class="close-icon fa fa-close" onclick="closeMenu();"></div>            
+            <div id="menu-icon" class="menu-icon fa fa-bars" onclick="openMenu()"></div>            
+            <div class="menu">
+                <ul id="menu-items" class="menu-items">	                    
+                    <li>
+                        <p>Bolos</p>
+                        <ul class="sub-items">
+                            <li><a href="tabela_de_precos_dos_bolos.php"><p>Tabela de preços</p></a></li>
+                            <li><a href="cobertura_chantilly.php"><p>Fotos: Cobertura de Chantilly</p></a></li>
+                            <li><a href="cobertura_chocolate.php"><p>Fotos: Cobertura de Chocolate</p></a></li>
+                            <li><a href="cobertura_marshmallow.php"><p>Fotos: Cobertura de Marshmallow</p></a></li>
+                            <li><a href="cobertura_massa_folhada.php"><p>Fotos: Cobertura com Massa Folheada</p></a></li>
+                            <li><a href="cobertura_pasta_americana.php"><p>Fotos: Cobertura de Pasta Amaricana</p></a></li>
+                            <li><a href="cobertura_naked_cake.php"><p>Fotos: Naked Cake</p></a></li>
+                        </ul>
+                    </li>                    
+                </ul>
+            </div>
         </div>
+        
+        <div class="container col-9 right">
+            <p>
+                
+            </p>
+        </div>
+        
     </body>
 </html>
