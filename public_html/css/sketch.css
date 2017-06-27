@@ -1810,7 +1810,7 @@ vertical-drop-down-menu .menu-items li
         color: #000000;         
     }	 
 
-    .drop-down-menu .menu-icon
+    .drop-down-menu .menu-icon, .vertical-drop-down-menu .menu-icon
     {
         display: block;
     }
