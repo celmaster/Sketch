@@ -898,7 +898,7 @@ body { font-size: 100%; }
     border-radius: 0; 
 }
 
-.menu-items ul li:last-child:hover { border: 1px solid #00AAFF; }
+.menu-items ul li:last-child:hover { border: 1px solid #000000; }
 
 .vertical-drop-down-menu .menu-items ul li:last-child:hover { border: 0; }
 
@@ -932,7 +932,7 @@ vertical-drop-down-menu .menu-items li
     display: block;
 }
 
-.menu-items ul li:hover, .menu-items li:hover{ background-color: #00AAFF; color: #FFFFFF; }
+.menu-items ul li:hover, .menu-items li:hover{ background-color: #000000; color: #FFFFFF; }
 
 .drop-down-menu .menu-icon, .vertical-drop-down-menu .menu-icon  
 { 	
