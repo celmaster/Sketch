@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Sketch</title>
+        <title>Sketch - responsive front-end framework</title>
         <meta charset="utf-8">        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <!-- folhas de estilo -->
         <link rel="stylesheet" type="text/css" href="css/sketch.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         
         <!-- scripts -->
         <script src="js/sketch.js"></script>
@@ -14,34 +15,57 @@
     </head>
     <body>
         
-        <div class="vertical-drop-down-menu height-lv12 col-3 overflow-y bg-color-medium-blue" style="position: fixed">
-            <div id="background-menu" class="background-menu"></div>            
-            <div id="menu-top-icon" class="container mobile-device-element menu-top-icon"><p onclick="navPage('#');closeMenu() " class="font-dancing-script text-size-medium">Subir ao topo</p></div>
-            <div id="menu-close-button" class="close-icon fa fa-close" onclick="closeMenu();"></div>            
-            <div id="menu-icon" class="menu-icon fa fa-bars" onclick="openMenu()"></div>            
-            <div class="menu">
-                <ul id="menu-items" class="menu-items">	                    
-                    <li>
-                        <p>Bolos</p>
-                        <ul class="sub-items">
-                            <li><a href="tabela_de_precos_dos_bolos.php"><p>Tabela de preços</p></a></li>
-                            <li><a href="cobertura_chantilly.php"><p>Fotos: Cobertura de Chantilly</p></a></li>
-                            <li><a href="cobertura_chocolate.php"><p>Fotos: Cobertura de Chocolate</p></a></li>
-                            <li><a href="cobertura_marshmallow.php"><p>Fotos: Cobertura de Marshmallow</p></a></li>
-                            <li><a href="cobertura_massa_folhada.php"><p>Fotos: Cobertura com Massa Folheada</p></a></li>
-                            <li><a href="cobertura_pasta_americana.php"><p>Fotos: Cobertura de Pasta Amaricana</p></a></li>
-                            <li><a href="cobertura_naked_cake.php"><p>Fotos: Naked Cake</p></a></li>
-                        </ul>
-                    </li>                    
-                </ul>
+        <!-- corpo: cabecalho -->
+        <div class="container header bg-no-repeat bg-center-bottom">
+            <div class="container small-padding">
+                <h1 class="text-size-x-large font-anton text-center text-wide-shadow text-color-white">Sketch</h1>                
+            </div>
+            <div class="container bg-alpha-5-color-black">
+                <p class="text-size-medium font-handlee text-center text-wide-shadow text-color-white">
+                    Responsive Front-end Framework
+                </p>
             </div>
         </div>
         
-        <div class="container col-9 right">
-            <p>
-                
-            </p>
+        <!-- body: navbar -->        
+        <div class="drop-down-menu">
+            <div id="background-menu" class="background-menu"></div>                        
+            <div id="menu-top-icon" class="mobile-device-element menu-top-icon"><a href="javascript:navPage('#');closeMenu()"><p class="fa fa-arrow-up text-color-black bg-color-white"></p></a></div>
+            <div id="menu-close-button" class="close-icon fa fa-close" onclick="closeMenu();"></div>            
+            <div id="menu-icon" class="menu-icon fa fa-bars" onclick="openMenu()"></div>            
+            <div class="menu bg-color-black">
+                <ul id="menu-items" class="menu-items">	                    
+                    <li>
+                        <a class="desktop-device-element" href="javascript:navLink('presentation');"><p>Presentation</p></a>
+                        <a class="mobile-device-element" href="javascript:navLink('presentation');closeMenu()"><p>Presentation</p></a>
+                    </li>
+                </ul>
+            </div>
         </div>
+        <div class="large-border-bottom border-color-dodger-blue"></div>
+        
+        <!-- body: content area -->
+        <div class="container">
+            <div class="container col-12 slider-group">
+                <div class="container slider fade-in slow-duration bg-size-cover bg-center-top bg-no-repeat sketch-slider-1">
+                    <div class="absolute absolute-bottom bg-alpha-2-color-black col-12">
+                        <p class="text-color-white text-center">Sketch has classes with predefined formatting to facilitate responsive design.</p>
+                    </div>
+                </div>
+                <div class="container slider fade-in slow-duration bg-size-cover bg-center-bottom bg-no-repeat sketch-slider-2">
+                    <div class="absolute absolute-bottom bg-alpha-2-color-black col-12">
+                        <p class="text-color-white text-center">Sketch uses the twelve grid model to better scale the interface components to user device screens.</p>
+                    </div>
+                </div>
+                
+                <!-- loop duration -->
+                <input type="hidden" id="slider-time" value="7000">
+            </div>
+        </div>
+        <div class="large-border-bottom border-color-dodger-blue"></div>
+        
+        <!-- body: footer -->
+        <div id="top-icon" class="desktop-device-element top-icon"><a href="#"><p class="fa fa-arrow-up text-color-white"></p></a></div>
         
     </body>
 </html>

@@ -1,0 +1,96 @@
+/* Folha de estilo principal
+ *
+ * Marcelo Barbosa,
+ * junho, 2017.
+ */
+
+/* importacoes de arquivos externos: fontes */
+@import url('https://fonts.googleapis.com/css?family=Handlee');
+@import url('https://fonts.googleapis.com/css?family=Anton');
+@import url('https://fonts.googleapis.com/css?family=Palanquin');
+
+/* seletor: elemento */
+
+/* seletor: classe */
+
+/* fontes */
+.font-handlee { font-family: Handlee; }
+.font-anton { font-family: Anton; }
+.font-palanquin { font-family: Palanquin; }
+
+
+/* corpo: cabecalho */
+.header { background-image: url('https://raw.githubusercontent.com/celmaster/SM/master/Assets/Images/SM/backgrounds/Sketch.jpg'); min-height: 200px; }
+
+/* corpo: menu */
+/* menu dropdow: sobreescreve cor e background */
+.drop-down-menu 
+{	
+    background-color: transparent;
+    color: #FFFFFF;
+}
+
+.menu-items li p { font-family: Palanquin; }
+
+.menu-items ul li 
+{	 
+    background-color: #2A2A2A;
+    color: #FFFFFF;
+}
+.menu-items ul li:last-child { border-color: #2A2A2A; }
+
+.menu-items ul li:last-child:hover { border-color: #1E90FF;  border-radius: 0px 0px 5px 5px; }
+
+.menu-items li:hover{ background-color: #2A2A2A; }
+
+.menu-items ul li:hover{ background-color: #1E90FF; box-shadow:none; border-radius: 0px; color: #000000; } 
+
+.drop-down-menu .menu-icon 
+{	
+    background-color: #2A2A2A;
+    color: #FFFFFF;
+    box-shadow: 0px 0px 10px #000000;
+    border-radius: 0;
+} 
+
+.menu-items li a, .menu-items ul li a { color: #FFFFFF; }
+.menu-items ul li a:hover{ color: #FFFFFF; }
+
+/* slider */
+.slider-group { min-height: 400px; }
+.sketch-slider-1 { background-image: url('https://raw.githubusercontent.com/celmaster/SM/master/Assets/Images/SM/backgrounds/css-resources.jpg'); }
+.sketch-slider-2 { background-image: url('https://raw.githubusercontent.com/celmaster/SM/master/Assets/Images/SM/backgrounds/responsiveInterface.jpg'); }
+
+/* media query para resolucao de telas: sobreescreve classes */
+@media only screen and (max-width: 480px) /* smartphones */
+{
+    .drop-down-menu, .menu-items ul { background-color: transparent; }	
+    
+    .menu-items li, .menu-items li a, .menu-items ul li a, .menu-items ul li:hover, 
+    .menu-items ul li, .menu-items li:hover { background-color: transparent; color: #000000; }
+
+    .menu-items li a, .menu-items li p { color: #FFFFFF; background-color: transparent; }
+
+    .menu-items li p:hover, .menu-items li p:active, .menu-items li a:active, .menu-items li a:hover, .menu-items ul li a:active, .menu-items ul li a:hover, 
+    .menu-items ul li p:hover, .menu-items ul li p:active, .menu-items .caption-link:hover, .menu-items .caption-link:active
+    {
+        background-color: #FFFFFF; 
+        color: #000000;
+        border-radius: 0px;
+    }
+
+    .menu-items .sub-items { display: block; }
+
+    .menu-items ul li p { border: 0px; }
+
+    .menu-items .caption-link { background-color: #FFFFFF; color: #000000; }
+
+    .menu-items ul li:last-child
+    {
+        border: 0px;
+        border-radius: 0px;
+    }
+
+    .menu-items ul li:last-child:hover { border: 0px; }	    
+
+}
