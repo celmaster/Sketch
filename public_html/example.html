@@ -18,9 +18,22 @@
         <div class="container bg-color-indigo">
             <h1 class="small-padding text-center text-color-white text-size-medium">Header of page: insert your title here.</h1>            
         </div>
-        <div class="container bg-color-white small-border-bottom border-color-indigo">
+        <div class="container bg-color-white">
             <p class="text-center text-color-indigo">Subtitle of page: a brief description of page content.</p>
         </div>
+        <div class="drop-down-menu">
+            <div id="background-menu" class="background-menu"></div>                        
+            <div id="menu-top-icon" class="mobile-device-element menu-top-icon"><a href="javascript:navPage('#');closeMenu()"><p class="fa fa-arrow-up text-color-white bg-color-indigo"></p></a></div>
+            <div id="menu-close-button" class="close-icon fa fa-close" onclick="closeMenu();"></div>            
+            <div id="menu-icon" class="menu-icon fa fa-bars" onclick="openMenu()"></div>            
+            <div class="menu bg-color-indigo">
+                <ul id="menu-items" class="menu-items">	                    
+                    <li>                        
+                        <a href="index.html"><p>Back to Framework</p></a>
+                    </li>
+                </ul>
+            </div>
+        </div> 
         <div class="row long-height">
             <div class="col-4 col-mh-6 long-height small-padding-top small-padding-bottom x-small-padding-left x-small-padding-right">
                 <div class="container long-height small-border-frame border-color-indigo">

@@ -7,3 +7,66 @@
 /* seletor: elemento */
 body { background-color: #2A2A2A;  }
 
+/* menu dropdown */
+.menu-items ul li 
+{	 
+    background-color: #FFFFFF;
+    color: #4B0082;
+}
+.menu-items ul li:last-child { border-color: #4B0082; }
+
+.menu-items ul li:last-child:hover { border-color: #FFFFFF;  border-radius: 0px 0px 5px 5px; }
+
+.menu-items li:hover{ background-color: #FFFFFF; }
+.menu-items li a:hover { color: #4B0082; }
+
+.menu-items ul li:hover{ background-color: #FFFFFF; box-shadow:none; border-radius: 0px; color: #4B0082; } 
+
+.drop-down-menu .menu-icon 
+{	
+    background-color: #FFFFFF;
+    color: #4B0082;
+    box-shadow: 0 0 0 transparent;
+    border-radius: 0;
+} 
+
+.menu-items li a, .menu-items ul li a { color: #FFFFFF; }
+.menu-items ul li a:hover{ color: #FFFFFF; }
+
+.drop-down-menu .close-icon { color: #4B0082; }
+
+/* media query para resolucao de telas: sobreescreve classes */
+@media only screen and (max-width: 480px) /* smartphones */
+{
+    .drop-down-menu, .drop-down-menu .menu, .menu-items ul { background-color: transparent; }
+    
+    .drop-down-menu .background-menu { background-color: #FFFFFF }
+    
+    .menu-items li, .menu-items li a, .menu-items ul li a, .menu-items ul li:hover, 
+    .menu-items ul li, .menu-items li:hover { background-color: transparent; color: #FFFFFF; }
+
+    .menu-items li a, .menu-items li p { color: #4B0082; background-color: transparent; }
+
+    .menu-items li p:hover, .menu-items li p:active, .menu-items li a:active, .menu-items li a:hover, .menu-items ul li a:active, .menu-items ul li a:hover, 
+    .menu-items ul li p:hover, .menu-items ul li p:active, .menu-items .caption-link:hover, .menu-items .caption-link:active
+    {
+        background-color: #4B0082; 
+        color: #FFFFFF;
+        border-radius: 0px;
+    }
+
+    .menu-items .sub-items { display: block; }
+
+    .menu-items ul li p { border: 0px; }
+
+    .menu-items .caption-link { background-color: #FFFFFF; color: #000000; }
+
+    .menu-items ul li:last-child
+    {
+        border: 0px;
+        border-radius: 0px;
+    }
+
+    .menu-items ul li:last-child:hover { border: 0px; }	    
+
+}

@@ -20,7 +20,8 @@
 
 
 /* corpo: cabecalho */
-.header { background-image: url('https://raw.githubusercontent.com/celmaster/SM/master/Assets/Images/SM/backgrounds/Sketch.jpg'); min-height: 200px; }
+.header, .sketch-background { background-image: url('https://raw.githubusercontent.com/celmaster/SM/master/Assets/Images/SM/backgrounds/Sketch.jpg'); }
+.header { min-height: 200px; }
 
 /* corpo: menu */
 /* menu dropdow: sobreescreve cor e background */
@@ -49,7 +50,7 @@
 {	
     background-color: #2A2A2A;
     color: #FFFFFF;
-    box-shadow: 0px 0px 10px #000000;
+    box-shadow: 0 0 0 transparent;
     border-radius: 0;
 } 
 
@@ -63,13 +64,13 @@
 .sketch-image-example 
 { 
     min-height: 400px;
-    background-image: url('https://raw.githubusercontent.com/celmaster/SM/master/Assets/Images/SM/backgrounds/code-example.jpg');
+    background-image: url('https://raw.githubusercontent.com/celmaster/SM/master/Assets/Images/SM/backgrounds/sketch-exemplo.jpg');
 }
 
 /* media query para resolucao de telas: sobreescreve classes */
 @media only screen and (max-width: 480px) /* smartphones */
 {
-    .drop-down-menu, .menu-items ul { background-color: transparent; }	
+    .drop-down-menu, .drop-down-menu .menu, .menu-items ul { background-color: transparent; }
     
     .menu-items li, .menu-items li a, .menu-items ul li a, .menu-items ul li:hover, 
     .menu-items ul li, .menu-items li:hover { background-color: transparent; color: #000000; }
