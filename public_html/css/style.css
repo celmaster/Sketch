@@ -58,8 +58,13 @@
 
 /* slider */
 .slider-group { min-height: 400px; }
-.sketch-slider-1 { background-image: url('https://raw.githubusercontent.com/celmaster/SM/master/Assets/Images/SM/backgrounds/css-resources.jpg'); }
-.sketch-slider-2 { background-image: url('https://raw.githubusercontent.com/celmaster/SM/master/Assets/Images/SM/backgrounds/responsiveInterface.jpg'); }
+
+/* imagens */
+.sketch-image-example 
+{ 
+    min-height: 400px;
+    background-image: url('https://raw.githubusercontent.com/celmaster/SM/master/Assets/Images/SM/backgrounds/code-example.jpg');
+}
 
 /* media query para resolucao de telas: sobreescreve classes */
 @media only screen and (max-width: 480px) /* smartphones */
