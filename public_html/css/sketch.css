@@ -428,6 +428,21 @@ body { font-size: 100%; }
 .bg-top { background-position: top; }
 .bg-bottom { background-position: bottom; }
 
+/* opacidade */
+.transparent { opacity: 0; }
+.weaker-opacity { opacity: 0.05; }
+.weak-opacity { opacity: 0.1; }
+.lowest-opacity { opacity: 0.2; }
+.lower-opacity { opacity: 0.3; }
+.low-opacity { opacity: 0.4; }
+.medium-opacity { opacity: 0.5; }
+.high-opacity { opacity: 0.6; }
+.higher-opacity { opacity: 0.7; }
+.highest-opacity { opacity: 0.8; }
+.strong-opacity { opacity: 0.9; }
+.stronger-opacity { opacity: 0.95; }
+.no-transparent { opacity: 1; }
+
 /* menus de navegacao */
 .navigator-menu 
 { 

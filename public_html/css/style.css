@@ -61,11 +61,9 @@
 .slider-group { min-height: 400px; }
 
 /* imagens */
-.sketch-image-example 
-{ 
-    min-height: 400px;
-    background-image: url('https://raw.githubusercontent.com/celmaster/SM/master/Assets/Images/SM/backgrounds/sketch-exemplo.jpg');
-}
+.sketch-image-example, .sketch-image-example-2 { min-height: 400px; }   
+.sketch-image-example { background-image: url('https://raw.githubusercontent.com/celmaster/SM/master/Assets/Images/SM/backgrounds/css-framework-example-1.jpg'); }
+.sketch-image-example-2 { background-image: url('https://raw.githubusercontent.com/celmaster/SM/master/Assets/Images/SM/backgrounds/css-framework-example-2.jpg'); }
 
 /* media query para resolucao de telas: sobreescreve classes */
 @media only screen and (max-width: 480px) /* smartphones */
@@ -98,5 +96,9 @@
     }
 
     .menu-items ul li:last-child:hover { border: 0px; }	    
+    
+    /* imagens de fundo */
+    .sketch-image-example { background-image: url('https://raw.githubusercontent.com/celmaster/SM/master/Assets/Images/SM/backgrounds/css-framework-example-1-mobile.jpg'); }
+.sketch-image-example-2 { background-image: url('https://raw.githubusercontent.com/celmaster/SM/master/Assets/Images/SM/backgrounds/css-framework-example-2-mobile.jpg'); }
 
 }

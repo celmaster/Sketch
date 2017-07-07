@@ -27,7 +27,7 @@ body { background-color: #2A2A2A;  }
     background-color: #FFFFFF;
     color: #4B0082;
     box-shadow: 0 0 0 transparent;
-    border-radius: 0;
+    border-radius: 0;    
 } 
 
 .menu-items li a, .menu-items ul li a { color: #FFFFFF; }
@@ -38,8 +38,7 @@ body { background-color: #2A2A2A;  }
 /* media query para resolucao de telas: sobreescreve classes */
 @media only screen and (max-width: 480px) /* smartphones */
 {
-    .drop-down-menu, .drop-down-menu .menu, .menu-items ul { background-color: transparent; }
-    
+    .drop-down-menu, .drop-down-menu .menu, .menu-items ul { background-color: transparent; }    
     .drop-down-menu .background-menu { background-color: #FFFFFF }
     
     .menu-items li, .menu-items li a, .menu-items ul li a, .menu-items ul li:hover, 
