@@ -78,7 +78,7 @@ function closeMenu()
     display("menu-icon", true);
     display("menu-close-button", false);
     display("background-menu", false);
-    display("menu-items", false);
+    display("menu", false);
     display("menu-top-icon", false);
 
     // altera o valor da variavel logica
@@ -94,7 +94,7 @@ function openMenu()
     display("menu-icon", false);
     display("menu-close-button", true);
     display("background-menu", true);
-    display("menu-items", true);
+    display("menu", true);
     display("menu-top-icon", true);
 
     // altera o valor da variavel logica
@@ -111,7 +111,7 @@ function estabilishMenu()
     if (window.innerWidth > 480)
     {
         display("menu-icon", false);
-        display("menu-items", true);
+        display("menu", true);
         display("menu-close-button", false);
         display("background-menu", false);
         display("menu-top-icon", false);
@@ -123,7 +123,7 @@ function estabilishMenu()
             if (!menuIsOpen)
             {
                 display("menu-icon", true);
-                display("menu-items", false);
+                display("menu", false);
             }else
                 {
                     openMenu();
