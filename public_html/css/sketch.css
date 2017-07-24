@@ -65,7 +65,7 @@ body { font-size: 100%; }
 .mobile-device-element { display: none; }
 
 /* containers, paineis, linhas, cards e boxes */
-.container, .panel, .row, .card, .small-box, .medium-box, .large-box, .jumbo-box, .extra-jumbo-box,
+.container, .panel, .row, .small-box, .medium-box, .large-box, .jumbo-box, .extra-jumbo-box,
 .relative-small-box, .relative-medium-box, .relative-large-box, .relative-jumbo-box, .relative-extra-jumbo-box
 { position: relative; padding: 0; border: 0; margin: 0; }
 
@@ -74,7 +74,7 @@ body { font-size: 100%; }
 
 .container:after, .panel:after, .row:after { content: ""; display: block; clear: both; } 
 
-/* mensagens */
+/* mensagens para paineis */
 .tip-panel { background-color: #F0FFFF; border: 0; border-left: 10px solid #0000FF;  }
 .negative-panel { background-color: #FFEFD5; border: 0; border-left: 10px solid #FF0000;  }
 .positive-panel { background-color: #98FB98; border: 0; border-left: 10px solid #006400;  }
@@ -243,6 +243,84 @@ body { font-size: 100%; }
 .shadow-9-top-right { box-shadow: 22px -22px 45px #000000; }
 .shadow-10-top-right { box-shadow: 25px -25px 50px #000000; }
 
+/* sombra interna */
+.inner-shadow-1 { box-shadow: 0 0 5px #000000 inset; }
+.inner-shadow-2 { box-shadow: 0 0 10px #000000 inset; }
+.inner-shadow-3 { box-shadow: 0 0 15px #000000 inset; }
+.inner-shadow-4 { box-shadow: 0 0 20px #000000 inset; }
+.inner-shadow-5 { box-shadow: 0 0 25px #000000 inset; }
+.inner-shadow-6 { box-shadow: 0 0 30px #000000 inset; }
+.inner-shadow-7 { box-shadow: 0 0 35px #000000 inset; }
+.inner-shadow-8 { box-shadow: 0 0 40px #000000 inset; }
+.inner-shadow-9 { box-shadow: 0 0 45px #000000 inset; }
+.inner-shadow-10 { box-shadow: 0 0 50px #000000 inset; }
+
+.inner-shadow-1-bottom { box-shadow: 0 2px 5px #000000 inset; }
+.inner-shadow-2-bottom { box-shadow: 0 5px 10px #000000 inset; }
+.inner-shadow-3-bottom { box-shadow: 0 7px 15px #000000 inset; }
+.inner-shadow-4-bottom { box-shadow: 0 10px 20px #000000 inset; }
+.inner-shadow-5-bottom { box-shadow: 0 12px 25px #000000 inset; }
+.inner-shadow-6-bottom { box-shadow: 0 15px 30px #000000 inset; }
+.inner-shadow-7-bottom { box-shadow: 0 17px 35px #000000 inset; }
+.inner-shadow-8-bottom { box-shadow: 0 20px 40px #000000 inset; }
+.inner-shadow-9-bottom { box-shadow: 0 22px 45px #000000 inset; }
+.inner-shadow-10-bottom { box-shadow: 0 25px 50px #000000 inset; }
+
+.inner-shadow-1-bottom-left { box-shadow: -2px 2px 5px #000000 inset; }
+.inner-shadow-2-bottom-left { box-shadow: -5px 5px 10px #000000 inset; }
+.inner-shadow-3-bottom-left { box-shadow: -7px 7px 15px #000000 inset; }
+.inner-shadow-4-bottom-left { box-shadow: -10px 10px 20px #000000 inset; }
+.inner-shadow-5-bottom-left { box-shadow: -12px 12px 25px #000000 inset; }
+.inner-shadow-6-bottom-left { box-shadow: -15px 15px 30px #000000 inset; }
+.inner-shadow-7-bottom-left { box-shadow: -17px 17px 35px #000000 inset; }
+.inner-shadow-8-bottom-left { box-shadow: -20px 20px 40px #000000 inset; }
+.inner-shadow-9-bottom-left { box-shadow: -22px 22px 45px #000000 inset; }
+.inner-shadow-10-bottom-left { box-shadow: -25px 25px 50px #000000 inset; }
+
+.inner-shadow-1-bottom-right { box-shadow: 2px 2px 5px #000000 inset; }
+.inner-shadow-2-bottom-right { box-shadow: 5px 5px 10px #000000 inset; }
+.inner-shadow-3-bottom-right { box-shadow: 7px 7px 15px #000000 inset; }
+.inner-shadow-4-bottom-right { box-shadow: 10px 10px 20px #000000 inset; }
+.inner-shadow-5-bottom-right { box-shadow: 12px 12px 25px #000000 inset; }
+.inner-shadow-6-bottom-right { box-shadow: 15px 15px 30px #000000 inset; }
+.inner-shadow-7-bottom-right { box-shadow: 17px 17px 35px #000000 inset; }
+.inner-shadow-8-bottom-right { box-shadow: 20px 20px 40px #000000 inset; }
+.inner-shadow-9-bottom-right { box-shadow: 22px 22px 45px #000000 inset; }
+.inner-shadow-10-bottom-right { box-shadow: 25px 25px 50px #000000 inset; }
+
+.inner-shadow-1-top { box-shadow: 0 -2px 5px #000000 inset; }
+.inner-shadow-2-top { box-shadow: 0 -5px 10px #000000 inset; }
+.inner-shadow-3-top { box-shadow: 0 -7px 15px #000000 inset; }
+.inner-shadow-4-top { box-shadow: 0 -10px 20px #000000 inset; }
+.inner-shadow-5-top { box-shadow: 0 -12px 25px #000000 inset; }
+.inner-shadow-6-top { box-shadow: 0 -15px 30px #000000 inset; }
+.inner-shadow-7-top { box-shadow: 0 -17px 35px #000000 inset; }
+.inner-shadow-8-top { box-shadow: 0 -20px 40px #000000 inset; }
+.inner-shadow-9-top { box-shadow: 0 -22px 45px #000000 inset; }
+.inner-shadow-10-top { box-shadow: 0 -25px 50px #000000 inset; }
+
+.inner-shadow-1-top-left { box-shadow: -2px -2px 5px #000000 inset; }
+.inner-shadow-2-top-left { box-shadow: -5px -5px 10px #000000 inset; }
+.inner-shadow-3-top-left { box-shadow: -7px -7px 15px #000000 inset; }
+.inner-shadow-4-top-left { box-shadow: -10px -10px 20px #000000 inset; }
+.inner-shadow-5-top-left { box-shadow: -12px -12px 25px #000000 inset; }
+.inner-shadow-6-top-left { box-shadow: -15px -15px 30px #000000 inset; }
+.inner-shadow-7-top-left { box-shadow: -17px -17px 35px #000000 inset; }
+.inner-shadow-8-top-left { box-shadow: -20px -20px 40px #000000 inset; }
+.inner-shadow-9-top-left { box-shadow: -22px -22px 45px #000000 inset; }
+.inner-shadow-10-top-left { box-shadow: -25px -25px 50px #000000 inset; }
+
+.inner-shadow-1-top-right { box-shadow: 2px -2px 5px #000000 inset; }
+.inner-shadow-2-top-right { box-shadow: 5px -5px 10px #000000 inset; }
+.inner-shadow-3-top-right { box-shadow: 7px -7px 15px #000000 inset; }
+.inner-shadow-4-top-right { box-shadow: 10px -10px 20px #000000 inset; }
+.inner-shadow-5-top-right { box-shadow: 12px -12px 25px #000000 inset; }
+.inner-shadow-6-top-right { box-shadow: 15px -15px 30px #000000 inset; }
+.inner-shadow-7-top-right { box-shadow: 17px -17px 35px #000000 inset; }
+.inner-shadow-8-top-right { box-shadow: 20px -20px 40px #000000 inset; }
+.inner-shadow-9-top-right { box-shadow: 22px -22px 45px #000000 inset; }
+.inner-shadow-10-top-right { box-shadow: 25px -25px 50px #000000 inset; }
+
 /* paineis */
 .panel { margin: 5px 0 5px 0; }
 
@@ -271,20 +349,20 @@ body { font-size: 100%; }
 /* posicionamento de elementos */ 
 .center { margin: auto; }
 .absolute-center { left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); }
-.absolute-middle { left: 50%; top: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); }
+.absolute-vertical-center { top: 50%; -webkit-transform: translateY(-50%); transform: translateY(-50%); }
+.absolute-middle { left: 50%; top: 50%; -webkit-transform: translate(-50%,-50%); transform: translate(-50%,-50%); }
 .absolute-right { right: 0; }
 .absolute-left { left: 0; }
 .absolute-top { top: 0;	}
 .absolute-bottom { bottom: 0; }
 .block { display: block; }
-.nofloat { float: none; }
+.no-float { float: none; }
 .left { float: left; }
 .right { float: right; }
 .inline { display: inline-block; }
 .absolute { position: absolute; }
 .fixed { position: fixed; z-index: 1; }
 .flex-box {  display: -webkit-flex; display: flex; }
-
 .flex-item { -webkit-flex: 1; -ms-flex: 1; flex: 1; }
 
 /* textos: tamanhos */
@@ -304,22 +382,23 @@ body { font-size: 100%; }
 .text-right { text-align: right; }
 .text-justify { text-align: justify; }
 
-/* textos: identacao */
-.small-indent { text-indent: 15px; }
-.indent { text-indent: 30px; }
-.medium-indent { text-indent: 45px; }
-.large-indent { text-indent: 60px; }
+/* textos: indentacao */
+.small-indent { text-indent: 16px; }
+.indent { text-indent: 32px; }
+.medium-indent { text-indent: 48px; }
+.large-indent { text-indent: 64px; }
 
 /* textos: decoracao */
 .text-underline { text-decoration: underline; }
 .text-overline { text-decoration: overline; }
 .text-strike { text-decoration: line-through; }
-.text-non-decoration { text-decoration: none; }
+.no-decoration { text-decoration: none; }
 
 /* textos: transformacao */
 .text-uppercase { text-transform: uppercase; }
 .text-lowercase { text-transform: lowercase; }
 .text-capitalize { text-transform: capitalize; }
+.text-cap-first-word:first-letter { text-transform: capitalize; }
 
 /* textos: espacamento */
 .large-line-height { line-height: 2; }
@@ -331,6 +410,8 @@ body { font-size: 100%; }
 
 /* textos: negrito */
 .text-bold { font-weight: bold; }
+
+/*textos: variantes*/
 .text-small-caps { font-variant: small-caps; }
 
 /* textos: sombra */
@@ -662,6 +743,7 @@ vertical-drop-down-menu .menu-items li { position: relative; display: block; }
 .large-rounding { border-radius: 50px; }
 .circle-rounding { border-radius: 100%; }
 
+.solid-border { border-style: solid; }
 .double-border { border-style: double; }
 .dotted-border { border-style: dotted; }
 .dashed-border { border-style: dashed; }
