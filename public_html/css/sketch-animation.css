@@ -4,6 +4,10 @@
  * julho, 2017.
  */
 
+/* animacoes: conteineres*/
+.marquee { position: relative; padding: 0; border: 0; margin: 0; white-space: nowrap; }
+.marquee::after { content: ""; display: block; clear: both; }
+
 /* animacoes */
 .border-fade-in { border: 0 solid; -webkit-animation: border-fade-in linear 1s; animation: border-fade-in linear 1s; }
 .border-fade-out { border: 15px solid; -webkit-animation: border-fade-out linear 1s; animation: border-fade-out linear 1s; }
@@ -23,6 +27,9 @@
 .slide-right-to-left { position: absolute; right: 0; -webkit-animation: slide-right-to-left linear 1s; animation: slide-right-to-left linear 1s; }
 .vertical-rotate { -webkit-animation: vertical-rotate linear 1s; animation: vertical-rotate linear 1s; }
 
+.left-to-right { display: inline-block; padding-left: 100%; -webkit-animation: marquee-right-to-left linear 25s infinite reverse; animation: marquee-right-to-left linear 25s infinite reverse; }
+.right-to-left { display: inline-block; padding-left: 100%; -webkit-animation: marquee-right-to-left linear 25s infinite; animation: marquee-right-to-left linear 25s infinite; }
+
 /* animacoes: duracao */
 .shortest-duration { -webkit-animation-duration: 0.2s; animation-duration: 0.2s; }
 .shorter-duration { -webkit-animation-duration: 0.5s; animation-duration: 0.5s; }
@@ -34,13 +41,17 @@
 .long-duration { -webkit-animation-duration: 5s; animation-duration: 5s; }
 .longer-duration { -webkit-animation-duration: 7s; animation-duration: 7s; }
 .longest-duration { -webkit-animation-duration: 10s; animation-duration: 10s; }
+.slightly-extended-duration { -webkit-animation-duration: 15s; animation-duration: 15s; }
+.extended-duration { -webkit-animation-duration: 20s; animation-duration: 20s; }
+.severely-extended-duration { -webkit-animation-duration: 25s; animation-duration: 25s; }
+.max-extended-duration { -webkit-animation-duration: 30s; animation-duration: 30s; }
 
 /* animacoes: loop */
 .loop-animation { -webkit-animation-iteration-count: infinite; animation-iteration-count: infinite; }
 
 /* animacoes: direcao */
 .animation-reverse-direction { -webkit-animation-direction: reverse; animation-direction: reverse; }
-.animation-alternate-direction { -webkit-animation-direction: reverse; animation-direction: reverse; }
+.animation-alternate-direction { -webkit-animation-direction: alternate; animation-direction: alternate; }
 
 @keyframes move-left-to-right
 {
@@ -244,4 +255,16 @@
 {
     0% { right: 100%; }
     100% { right: 0; }
+}
+
+@keyframes marquee-right-to-left
+{    
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+
+@-webkit-keyframes marquee-right-to-left
+{
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
 }
