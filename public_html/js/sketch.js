@@ -30,6 +30,21 @@ function exist(id)
         }
 }
 
+function getObject(id)
+{
+    // retorna a instancia de um objeto
+    // declaracao de variaveis
+    var obj = null;
+    
+    if(exist(id))
+    {
+        obj = document.getElementById(id);
+    }
+    
+    // retorno de valor
+    return obj;
+}
+
 function display(id, isVisible)
 {
     // oculta ou exibe um elemento
@@ -46,6 +61,31 @@ function display(id, isVisible)
             object.style.display = "none";
         }
     }
+}
+
+function show(obj)
+{
+    // torna um elemento visivel
+    try
+    {
+        display(obj.id, true);
+    }catch(error)
+        {
+            console.log("function: show(obj) => o parametro recebido nao eh um objeto");
+        }
+}
+
+function hide(obj)
+{
+    // torna um elemento invisivel
+    // torna um elemento visivel
+    try
+    {
+        display(obj.id, false);
+    }catch(error)
+        {
+            console.log("function: hide(obj) => o parametro recebido nao eh um objeto");
+        }
 }
 
 function openNavigator(id)
@@ -373,16 +413,62 @@ function topLinkHandler()
         }
 }
 
+function hideSubMenu(obj)
+{
+    // exibe o sub-menu
+    // declaração de variaveis
+    var menu = document.getElementById("menu-items");
+    var items = menu.getElementsByTagName("UL");
+    for(var i = 0; i < items.length; i++)
+    {
+        if(items[i].id != "")
+        {
+            if(items[i].id != obj.id)
+            {
+               items[i].style.display = "none";
+               items[i].removeAttribute("style");
+            }
+        }
+    }
+}
+
 // ----> listeners
 window.addEventListener("resize", function (){
     estabilishMenu();
 });
 window.addEventListener("load", function (){
-    playSlider();
+    playSlider();    
 });
 
 window.addEventListener("scroll", function(){
   topLinkHandler();
+});
+
+window.addEventListener("click", function(event){
+    
+    // controla a nevegacao dos sub-menus pelo menu drop-down por meio de toque/clique 
+    // declaracao de variaveis
+    var obj = event.target;    
+    var submenu = obj.parentNode.getElementsByTagName("UL")[0];
+
+    if(submenu != null)
+    {
+        var strId = submenu.id;
+
+        if(strId.search("sub-menu-") > -1)
+        {
+            if((submenu.style.display == "none") || (submenu.style.display == ""))
+            {
+                submenu.style.display = "block";
+                hideSubMenu(submenu);            
+            }else
+                {
+                    submenu.style.display = "none";
+                    submenu.removeAttribute("style");
+                }
+        }
+
+    }
 });
 
 // ----> threads
