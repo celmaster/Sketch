@@ -63,29 +63,16 @@ function display(id, isVisible)
     }
 }
 
-function show(obj)
+function show(id)
 {
-    // torna um elemento visivel
-    try
-    {
-        display(obj.id, true);
-    }catch(error)
-        {
-            console.log("function: show(obj) => o parametro recebido nao eh um objeto");
-        }
+   // torna um elemento visivel
+   display(id, true);   
 }
 
-function hide(obj)
+function hide(id)
 {
-    // torna um elemento invisivel
-    // torna um elemento visivel
-    try
-    {
-        display(obj.id, false);
-    }catch(error)
-        {
-            console.log("function: hide(obj) => o parametro recebido nao eh um objeto");
-        }
+   // torna um elemento invisivel   
+   display(id, false);   
 }
 
 function openNavigator(id)
@@ -175,16 +162,14 @@ function estabilishMenu()
 
 function navLink(id)
 {
-    // faz navegacao de conteudo por id
-    
+    // faz navegacao de conteudo por id   
     // realiza a navegacao
     window.location.href = "#" + id;
 }
 
 function navPage(page)
 {
-    // faz navegacao de conteudo por pagina   
-
+    // faz navegacao de conteudo por pagina
     // realiza a navegacao
     window.location.href = page;
 }
@@ -202,7 +187,6 @@ function initImageViewLength(imageListId)
 function noQuote(str)
 {
     // remove aspas
-
     while (str.search("\"") > -1)
     {
         str = str.replace("\"", "");
@@ -291,7 +275,6 @@ function viewById(imageId, viewerId, imageListId, presentationId)
 function view(object, viewerId, imageListId, presentationId)
 {
     // visualiza imagens de uma lista
-
     // verifica se a variavel de quantidade de imagens foi inicializada
     if (imageViewLength === null)
     {
@@ -301,19 +284,30 @@ function view(object, viewerId, imageListId, presentationId)
     // verifica se o id do visualizador existe
     if (exist(viewerId) && exist(presentationId))
     {
-
         // anula o overflow do corpo do documento
         document.body.style.overflow = "hidden";
-
-        // obtem o indice da imagem para navegar para outras imagens
-        var imageIndex = parseInt(object.id.substring(object.id.lastIndexOf("-") + 1));
-        setImageViewPrior(imageIndex - 1);
-        setImageViewNext(imageIndex + 1);
+		
+		// armazena a descricao da imagem
+		var caption = "";
+		
+		// obtem o indice da imagem para navegar para outras imagens
+		var imageIndex = parseInt(object.id.substring(object.id.lastIndexOf("-") + 1));
+		setImageViewPrior(imageIndex - 1);
+		setImageViewNext(imageIndex + 1);
+		
+		//verifica se a descricao da imagem foi dada pelo desenvolvedor/designer
+		if(exist("image-caption-"+imageIndex))
+		{
+			caption = document.getElementById("image-caption-"+imageIndex).innerHTML;
+		}else
+			{
+				caption = "Foto " + imageIndex;
+			}
         
         // exibe a legenda da imagem caso o elemento image-caption exista
         if(exist("image-caption"))
         {
-            document.getElementById("image-caption").innerText = "Foto " + imageIndex;
+            document.getElementById("image-caption").innerText = caption;
         }
 
         // obtem a instancia do objeto img que ira atuar como visualizador
@@ -336,57 +330,31 @@ function view(object, viewerId, imageListId, presentationId)
     }
 }
 
-function playSlider()
+function playSlider(slider, time, index)
 {
-    // apresenta um slideshow
-    // declaracao de variaveis
-    var i;
-
+    // apresenta slides
     // obtem os sliders caso o vetor destes nao tenha sido inicializado
-    if (sliderGroup === null)
-    {
-        try
-        {
-            sliderGroup = document.getElementsByClassName("slider-group");
-            sliders = sliderGroup[0].getElementsByClassName("slider");
-            
-            if(exist("slider-time"))
-            {
-                sliderTime = parseInt(document.getElementById("slider-time").value);
-            }else
-                {
-                    sliderTime = 4000;
-                }
-            
-        }catch(error)
-              {
-                   sliderGroup = null;
-              }
-    }
+    slides = slider.getElementsByClassName("slider");					
     
-    // caso o grupo de slides nao seja nulo, entao realiza a apresentacao
-    if((sliderGroup !== null))
-    {
-
-        for (i = 0; i < sliders.length; i++)
-        {
-            sliders[i].style.display = "none";
-        }
-
-        sliders[sliderIndex].style.display = "block";
+    for (var i = 0; i < slides.length; i++)
+	{
+		slides[i].style.display = "none";
+	}
+	
+	slides[index].style.display = "block";
 
 
-        if (sliderIndex < (sliders.length - 1))
-        {
-            sliderIndex++;
-        } else
-            {
-                sliderIndex = 0;
-            }
+	if (index < (slides.length - 1))
+	{
+		index++;
+	} else
+		{
+			index = 0;
+		}			
+		
 
-        // executa a apresentacao com chamadas recursivas    
-        window.setTimeout(playSlider, sliderTime);
-    }
+	// executa a apresentacao com chamadas recursivas    
+	window.setTimeout(function(){playSlider(slider, time, index);}, time);
 }
 
 function topLinkHandler()
@@ -421,9 +389,9 @@ function hideSubMenu(obj)
     var items = menu.getElementsByTagName("UL");
     for(var i = 0; i < items.length; i++)
     {
-        if(items[i].id != "")
+        if(items[i].id !== "")
         {
-            if(items[i].id != obj.id)
+            if(items[i].id !== obj.id)
             {
                items[i].style.display = "none";
                items[i].removeAttribute("style");
@@ -432,32 +400,42 @@ function hideSubMenu(obj)
     }
 }
 
-// ----> listeners
-window.addEventListener("resize", function (){
-    estabilishMenu();
-});
-window.addEventListener("load", function (){
-    playSlider();    
-});
+function initSliders()
+{
+	// inicializa todos os sliders
+	if(exist("slider-data"))
+	{
+		// obtem os sliders presentes na tela
+		var arrayOfIds = JSON.parse(document.getElementById("slider-data").innerHTML);
+		var slider = null;
+		var time;
+		for(var i = 0; i < arrayOfIds.length; i++)
+		{
+			if(exist(arrayOfIds[i].id))
+			{
+				slider = document.getElementById(arrayOfIds[i].id);	
+				time = Math.abs(parseInt(arrayOfIds[i].time));
+				playSlider(slider, time, 0);
+			}	
+		}		
+		
+	}
+}
 
-window.addEventListener("scroll", function(){
-  topLinkHandler();
-});
-
-window.addEventListener("click", function(event){
-    
-    // controla a nevegacao dos sub-menus pelo menu drop-down por meio de toque/clique 
+function handleMainMenuByEvent(event)
+{
+	// controla a nevegacao dos sub-menus pelo menu drop-down por meio de toque/clique 
     // declaracao de variaveis
     var obj = event.target;    
     var submenu = obj.parentNode.getElementsByTagName("UL")[0];
 
-    if(submenu != null)
+    if(submenu !== null)
     {
         var strId = submenu.id;
 
         if(strId.search("sub-menu-") > -1)
         {
-            if((submenu.style.display == "none") || (submenu.style.display == ""))
+            if((submenu.style.display === "none") || (submenu.style.display === ""))
             {
                 submenu.style.display = "block";
                 hideSubMenu(submenu);            
@@ -465,10 +443,26 @@ window.addEventListener("click", function(event){
                 {
                     submenu.style.display = "none";
                     submenu.removeAttribute("style");
-                }
+                }				
         }
 
     }
+}
+
+// ----> listeners
+window.addEventListener("resize", function (){
+    estabilishMenu();
+});
+window.addEventListener("load", function (){
+	initSliders();
+});
+
+window.addEventListener("scroll", function(){
+	topLinkHandler();
+});
+
+window.addEventListener("click", function(event){
+	handleMainMenuByEvent(event);
 });
 
 // ----> threads

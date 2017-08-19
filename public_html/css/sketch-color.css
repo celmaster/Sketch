@@ -351,12 +351,18 @@
 .bg-alpha-4-color-black { background-color: rgba(0,0,0,0.6); }
 .bg-alpha-5-color-black { background-color: rgba(0,0,0,0.5); }
 .bg-alpha-6-color-black { background-color: rgba(0,0,0,0.4); }
+.bg-alpha-7-color-black { background-color: rgba(0,0,0,0.3); }
+.bg-alpha-8-color-black { background-color: rgba(0,0,0,0.2); }
+.bg-alpha-9-color-black { background-color: rgba(0,0,0,0.1); }
 .bg-alpha-1-color-white { background-color: rgba(255,255,255,0.9); }
 .bg-alpha-2-color-white { background-color: rgba(255,255,255,0.8); }
 .bg-alpha-3-color-white { background-color: rgba(255,255,255,0.7); }
 .bg-alpha-4-color-white { background-color: rgba(255,255,255,0.6); }
 .bg-alpha-5-color-white { background-color: rgba(255,255,255,0.5); }
 .bg-alpha-6-color-white { background-color: rgba(255,255,255,0.4); }
+.bg-alpha-7-color-white { background-color: rgba(255,255,255,0.3); }
+.bg-alpha-8-color-white { background-color: rgba(255,255,255,0.2); }
+.bg-alpha-9-color-white { background-color: rgba(255,255,255,0.1); }
 
 /* cores de fundo: gradientes */
 .bg-gradient-color-white-alice-blue { background:linear-gradient(#F0F8FF, #FFFFFF); }

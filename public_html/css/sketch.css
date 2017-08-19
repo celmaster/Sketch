@@ -357,6 +357,7 @@ form, .container, .panel, .row, .small-box, .medium-box, .large-box, .jumbo-box,
 .absolute-top { top: 0;	}
 .absolute-bottom { bottom: 0; }
 .block { display: block; }
+.hide { display: none; }
 .no-float { float: none; }
 .left { float: left; }
 .right { float: right; }
@@ -838,37 +839,31 @@ vertical-drop-down-menu .menu-items li { position: relative; display: block; }
 
 .presentation .close-icon, .presentation .prior-icon, .presentation .next-icon
 {
-    color: #FFFFFF;
+    color: #000000;
     position: fixed; 
     z-index: 3;
 }
 
 .presentation .close-icon { right: 0; top: 0; }
+.presentation .prior-icon, .presentation .next-icon, .presentation .close-icon { width: 50px; height: 50px; background-color: #FFFFFF; }
 
-.presentation .prior-icon 
-{ 
-    left: 0; 
+.presentation .prior-icon, .presentation .next-icon 
+{   
     top: 50%; 
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
     display: none;
 }
 
-.presentation .next-icon 
-{ 
-    right: 0; 
-    top: 50%; 
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    display: none;
-}
+.presentation .prior-icon { left: 0; }
+.presentation .next-icon { right: 0; }
 
 .presentation .image-viewer
 {
-    width:70%;	 
+    width:100%;	 
     height: 99.9%;
     position: relative;
-    top: 10px; 
+    top: 0; 
     margin: auto;
     overflow-y: auto;
 }
@@ -954,9 +949,7 @@ vertical-drop-down-menu .menu-items li { position: relative; display: block; }
         display: block;
     }
     
-    .album { max-width: 520px; }    
-    .tablet-device-element { display: block; }
-    .smartphone-device-element { display: none; }
+    .album { max-width: 520px; }        
 }
 
 @media only screen and (max-width: 600px) /* tablets e smartphones */
@@ -991,7 +984,7 @@ vertical-drop-down-menu .menu-items li { position: relative; display: block; }
     }
     
     .desktop-device-element { display: none; }
-    .tablet-device-element { display: block; }
+    .desktop-and-tablet-device-element, .tablet-device-element { display: block; }
     .smartphone-device-element { display: none; }
 }
 
