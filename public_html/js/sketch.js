@@ -8,6 +8,7 @@
 var imageViewLength = null;
 var imageViewPrior = null;
 var imageViewNext = null;
+var imageViewIsOpen = false;
 var sliderTime = 0;
 var sliderIndex = 0;
 var position = 1;
@@ -199,6 +200,9 @@ function closePresentation(presentationId)
 {
     // fecha a apresentacao de imagens
     display(presentationId, false);
+	
+	// altera o valor da variavel logica indicando que o visualizador de imagens esta fechado
+	imageViewIsOpen = false;
 
     // reseta o overflow do corpo do documento
     document.body.style.overflow = "auto";
@@ -327,6 +331,9 @@ function view(object, viewerId, imageListId, presentationId)
         
         // faz o top-icon ficar oculto
         display("top-icon", false);
+		
+		// altera o valor da variavel logica indicando que o visualizador de imagens esta aberto
+		imageViewIsOpen = true;
     }
 }
 
@@ -370,7 +377,7 @@ function topLinkHandler()
         {
             if (window.innerWidth > 480)
             {
-              if(exist("top-icon"))
+              if((exist("top-icon")) && (!imageViewIsOpen))
               {              
                  display("top-icon", true);              
               }else
