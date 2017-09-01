@@ -364,6 +364,26 @@
 .bg-alpha-8-color-white { background-color: rgba(255,255,255,0.2); }
 .bg-alpha-9-color-white { background-color: rgba(255,255,255,0.1); }
 
+/* cores de fundo: transparencia com gradientes */
+.bg-alpha-gradient-1-color-black { background:linear-gradient(transparent, rgba(0,0,0,0.9)); }
+.bg-alpha-gradient-2-color-black { background:linear-gradient(transparent, rgba(0,0,0,0.8)); }
+.bg-alpha-gradient-3-color-black { background:linear-gradient(transparent, rgba(0,0,0,0.7)); }
+.bg-alpha-gradient-4-color-black { background:linear-gradient(transparent, rgba(0,0,0,0.6)); }
+.bg-alpha-gradient-5-color-black { background:linear-gradient(transparent, rgba(0,0,0,0.5)); }
+.bg-alpha-gradient-6-color-black { background:linear-gradient(transparent, rgba(0,0,0,0.4)); }
+.bg-alpha-gradient-7-color-black { background:linear-gradient(transparent, rgba(0,0,0,0.3)); }
+.bg-alpha-gradient-8-color-black { background:linear-gradient(transparent, rgba(0,0,0,0.2)); }
+.bg-alpha-gradient-9-color-black { background:linear-gradient(transparent, rgba(0,0,0,0.1)); }
+.bg-alpha-gradient-1-color-white { background:linear-gradient(transparent, rgba(255,255,255,0.9)); }
+.bg-alpha-gradient-2-color-white { background:linear-gradient(transparent, rgba(255,255,255,0.8)); }
+.bg-alpha-gradient-3-color-white { background:linear-gradient(transparent, rgba(255,255,255,0.7)); }
+.bg-alpha-gradient-4-color-white { background:linear-gradient(transparent, rgba(255,255,255,0.6)); }
+.bg-alpha-gradient-5-color-white { background:linear-gradient(transparent, rgba(255,255,255,0.5)); }
+.bg-alpha-gradient-6-color-white { background:linear-gradient(transparent, rgba(255,255,255,0.4)); }
+.bg-alpha-gradient-7-color-white { background:linear-gradient(transparent, rgba(255,255,255,0.3)); }
+.bg-alpha-gradient-8-color-white { background:linear-gradient(transparent, rgba(255,255,255,0.2)); }
+.bg-alpha-gradient-9-color-white { background:linear-gradient(transparent, rgba(255,255,255,0.1)); }
+
 /* cores de fundo: gradientes */
 .bg-gradient-color-white-alice-blue { background:linear-gradient(#F0F8FF, #FFFFFF); }
 .bg-gradient-color-white-antique-white { background:linear-gradient(#FAEBD7, #FFFFFF); }

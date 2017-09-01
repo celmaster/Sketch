@@ -31,6 +31,114 @@ function exist(id)
         }
 }
 
+function createMask(id, mask)
+{
+    // cria uma mascara para um dado campo
+    if (exist(id))
+    {
+        var maskText = mask;
+        var targetObject = document.getElementById(id);
+        var text = targetObject.value;
+        var formattedText = "";
+        var position = text.length - 1;
+
+        // pega o texto corrente
+        formattedText = text.substring(0, position);
+
+        // concatena o valor com a mascara
+        if (maskText.charAt(position) == "x")
+        {
+            formattedText = new String(formattedText.concat(text.charAt(position)));
+
+        }else
+            {
+                formattedText = formattedText.concat(maskText.charAt(position));
+                formattedText = formattedText.concat(text.charAt(position));
+            }
+
+
+        // colocando o valor obtido no campo referenciado
+        targetObject.value = formattedText;
+    }
+
+}
+
+function validateLimit(begin, end, value)
+{
+    // avalia se um valor esta dentro de um limite 
+    if((value >= begin) && (value <= end))
+    {
+        return true;
+    }else
+        {
+            return false;
+        }
+}
+
+function isPositive(value)
+{
+    // verifica se um numero e positivo
+    if(value >= 0)
+    {    
+        return true;
+
+    }else
+        {
+            return false;
+        }
+	
+}
+
+function isDate(value)
+{
+    // verifica se um valor e uma data valida
+    var text = value; 
+    var day = parseInt(text.substring(0, 2));
+    var month = parseInt(text.substring(3, 5));
+    var year = parseInt(text.substring(6, 10));
+
+    // montando proposicoes
+    var isMonth28Days = ((day >= 1) && (day <= 28)) && (month == 2) && (year % 4 != 0);
+
+    var isMonth29Days = ((day >= 1) && (day <= 29)) && (month == 2) && (year % 4 == 0);
+
+    var isMonth30Days = ((month == 4) || (month == 6) || (month == 9) || 
+                         (month == 11)) && ((day >= 1) && (day <= 30));
+
+    var isMonth31Days = ((month == 1) || (month == 3) || (month == 5) || 
+                         (month == 7) || (month == 8) || (month == 10) || 
+                         (month == 12)) && ((day >= 1) && (day <= 31));
+
+
+    // criando uma avaliacao das proposicoes
+    var evaluate = (isMonth28Days || isMonth29Days || isMonth30Days || isMonth31Days);
+
+    // retorno de valor
+    return evaluate;
+	
+}
+
+function isTime(value)
+{
+    // verifica se um valor e um horario valido
+    var text = value; 
+    var hour = parseInt(text.substring(0, 2));
+    var minute = parseInt(text.substring(3, 5));
+    var second = parseInt(text.substring(6, 8));
+
+    // montando proposicoes
+    var isHour = ((hour >= 0) && (hour <= 23));        
+    var isMinute = ((minute >= 0) && (minute <= 59));    
+    var isSecond = ((second >= 0) && (second <= 59));
+
+    // criando uma avaliacao das proposicoes
+    var evaluate = (isHour && isMinute && isSecond);
+
+    // retorno de valor
+    return evaluate;
+	
+}
+
 function getObject(id)
 {
     // retorna a instancia de um objeto
@@ -341,7 +449,7 @@ function playSlider(slider, time, index)
 {
     // apresenta slides
     // obtem os sliders caso o vetor destes nao tenha sido inicializado
-    slides = slider.getElementsByClassName("slider");					
+    slides = slider.getElementsByClassName("slide");					
     
     for (var i = 0; i < slides.length; i++)
 	{
