@@ -40,6 +40,8 @@ body { font-size: 100%; }
 .long-height { min-height: 400px; }
 .longer-height { min-height: 450px; }
 .longest-height { min-height: 500px; }
+.jumbo-height { min-height: 550px; }
+.extra-jumbo-height { min-height: 600px; }
 
 /* grade de 12 colunas */
 .col-1 { width: 8.33%; }
