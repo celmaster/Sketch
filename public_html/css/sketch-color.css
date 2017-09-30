@@ -175,6 +175,7 @@
 .text-color-yellow-green { color: #9ACD32; }
 
 /* cores de fundo */
+.bg-color-transparent { background-color: transparent; }
 .bg-color-alice-blue { background-color: #F0F8FF; }
 .bg-color-antique-white { background-color: #FAEBD7; }
 .bg-color-aqua { background-color: #00FFFF; }

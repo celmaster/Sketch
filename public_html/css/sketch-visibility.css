@@ -1,0 +1,28 @@
+/* Sketch-visibility: controla a visibilidade de elementos
+ *
+ * Marcelo Barbosa,
+ * setembro, 2017.
+ */
+
+/* visibilidade de elementos por tipo de dispositivo */
+.desktop-device-element { display: block; }
+.desktop-and-tablet-device-element { display: block; }
+.tablet-device-element { display: none; }
+.tablet-and-smartphone-device-element { display: none; }
+.smartphone-device-element { display: none; }
+
+@media only screen and (max-width: 600px) /* tablets e smartphones */
+{
+    .desktop-device-element { display: none; }
+    .desktop-and-tablet-device-element, .tablet-device-element { display: block; }
+    .tablet-and-smartphone-device-element { display: block; }
+    .smartphone-device-element { display: none; }
+}
+
+@media only screen and (max-width: 480px) /* smartphones */
+{
+    .desktop-device-element { display: none; }
+    .desktop-and-tablet-device-element, .tablet-device-element { display: none; }
+    .tablet-and-smartphone-device-element { display: block; }
+    .smartphone-device-element { display: block; }
+}

@@ -62,13 +62,6 @@ body { font-size: 100%; }
 .overflow-x { overflow-x: auto; }
 .overflow-y { overflow-y: auto; }
 
-/* visibilidade de elementos por tipo de dispositivo */
-.desktop-device-element { display: block; }
-.desktop-and-tablet-device-element { display: block; }
-.tablet-device-element { display: none; }
-.tablet-and-smartphone-device-element { display: none; }
-.smartphone-device-element { display: none; }
-
 /* formularios, containers, paineis, linhas, cards e boxes */
 form, .container, .panel, .row, .small-box, .medium-box, .large-box, .jumbo-box, .extra-jumbo-box,
 .relative-small-box, .relative-medium-box, .relative-large-box, .relative-jumbo-box, .relative-extra-jumbo-box
@@ -988,10 +981,6 @@ vertical-drop-down-menu .menu-items li { position: relative; display: block; }
         display: inline;		
     }
     
-    .desktop-device-element { display: none; }
-    .desktop-and-tablet-device-element, .tablet-device-element { display: block; }
-    .tablet-and-smartphone-device-element { display: block; }
-    .smartphone-device-element { display: none; }
 }
 
 @media only screen and (max-width: 480px) /* smartphones */
@@ -1102,13 +1091,7 @@ vertical-drop-down-menu .menu-items li { position: relative; display: block; }
     .menu-items ul li:last-child:hover { border: 0; }
 
     .menu-items li p:active, .menu-items li a:active,  .menu-items ul li a:active  { background-color: #FFFFFF; color: #000000; }	     
-    .drop-down-menu .menu-icon, .vertical-drop-down-menu .menu-icon { display: block; }
-    
-    .desktop-device-element { display: none; }
-    .desktop-and-tablet-device-element, .tablet-device-element { display: none; }
-    .tablet-and-smartphone-device-element { display: block; }
-    .smartphone-device-element { display: block; }
-
+    .drop-down-menu .menu-icon, .vertical-drop-down-menu .menu-icon { display: block; }    
 }
 
 @media only screen and (max-width: 453px) /* smartphones */
@@ -1204,4 +1187,4 @@ form input[type=radio], form input[type=checkbox] { width: 25px; height: 25px; b
 
 form input[type=text]:focus, form input[type=password]:focus, form input[type=search]:focus, form input[type=email]:focus, 
 form input[type=number]:focus, form input[type=date]:focus, form input[type=month]:focus, form input[type=datetime-local]:focus,
-form input[type=color]:focus { border: 0; border-bottom: 1px solid #000000; }
+form input[type=color]:focus { border: 1px solid transparent; border-bottom: 1px solid #000000; }

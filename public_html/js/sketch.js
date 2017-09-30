@@ -19,6 +19,7 @@ var menuIsOpen = false;
 // funcoes globais
 
 // declaracao de funcoes
+// declaracao de funcoes
 function exist(id)
 {
     // verifica se o id de um elemento existe
@@ -29,6 +30,16 @@ function exist(id)
         {
             return false;
         }
+}
+
+function submitForm(id)
+{
+    // envia um formulario
+    if(exist(id))
+    {
+        var form = document.getElementById(id);
+        form.submit();
+    }
 }
 
 function createMask(id, mask)
@@ -46,7 +57,7 @@ function createMask(id, mask)
         formattedText = text.substring(0, position);
 
         // concatena o valor com a mascara
-        if (maskText.charAt(position) == "x")
+        if (maskText.charAt(position) === "x")
         {
             formattedText = new String(formattedText.concat(text.charAt(position)));
 
@@ -61,6 +72,49 @@ function createMask(id, mask)
         targetObject.value = formattedText;
     }
 
+}
+
+function numberFieldHandler(event, object)
+{
+    // controla um campo numerico
+    // declaracao de variaveis
+    var characterTyped = event.which || event.keyCode;
+    var isNumber = (characterTyped >= 48) && (characterTyped <= 57) && !event.ctrlKey;
+    var isDot = (event.which === 46) && (event.keyCode === 0);
+    var isDirectional = (characterTyped >= 37) && (characterTyped <= 40);
+    var isDelete = (event.which === 0) && (event.keyCode === 46);
+    var isBackspace = characterTyped === 8;
+    var isEnd = characterTyped === 35;
+    var isHome = characterTyped === 36;
+    var isCommand = event.ctrlKey;    
+    var str = object.value;    
+    var hasDot = str.indexOf(".") > -1;
+    
+    // constroi a primeira premissa
+    var firstStatement = isNumber || isDirectional || isDelete 
+                    || isBackspace || isEnd || isHome || isCommand;     
+    
+    // constroi a segunda premissa
+    var secondStatement = !hasDot && isDot;
+    
+    // variavel logica utilizada para indicar bloqueio ou liberação do caractere de entrada do usuario
+    var status = false;    
+    
+    // processamento logico das premissas
+    if(firstStatement && !isDot)
+    {       
+        status = true;     
+    }else
+        {
+            if(secondStatement)
+            {
+                status = true;
+            }
+        }
+       
+    
+    // retorno de valor
+    return status;   
 }
 
 function validateLimit(begin, end, value)
@@ -98,16 +152,16 @@ function isDate(value)
     var year = parseInt(text.substring(6, 10));
 
     // montando proposicoes
-    var isMonth28Days = ((day >= 1) && (day <= 28)) && (month == 2) && (year % 4 != 0);
+    var isMonth28Days = ((day >= 1) && (day <= 28)) && (month === 2) && (year % 4 !== 0);
 
-    var isMonth29Days = ((day >= 1) && (day <= 29)) && (month == 2) && (year % 4 == 0);
+    var isMonth29Days = ((day >= 1) && (day <= 29)) && (month === 2) && (year % 4 === 0);
 
-    var isMonth30Days = ((month == 4) || (month == 6) || (month == 9) || 
-                         (month == 11)) && ((day >= 1) && (day <= 30));
+    var isMonth30Days = ((month === 4) || (month === 6) || (month === 9) || 
+                         (month === 11)) && ((day >= 1) && (day <= 30));
 
-    var isMonth31Days = ((month == 1) || (month == 3) || (month == 5) || 
-                         (month == 7) || (month == 8) || (month == 10) || 
-                         (month == 12)) && ((day >= 1) && (day <= 31));
+    var isMonth31Days = ((month === 1) || (month === 3) || (month === 5) || 
+                         (month === 7) || (month === 8) || (month === 10) || 
+                         (month === 12)) && ((day >= 1) && (day <= 31));
 
 
     // criando uma avaliacao das proposicoes
