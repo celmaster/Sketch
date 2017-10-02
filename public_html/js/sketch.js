@@ -74,6 +74,22 @@ function createMask(id, mask)
 
 }
 
+function decimalBoundHandler(obj, decimalBound)
+{
+    var str = obj.value;
+    if(str.indexOf(".") > -1)
+    {    
+        // verifica se a quantidade de casas decimais estao dentro do limite
+        var decimals = str.split(".");
+        if(decimals[1].length > decimalBound)
+        {
+            str = str.substr(0,(str.indexOf(".")+decimalBound+1));
+        }
+        
+        obj.value = str;
+    }
+}
+
 function numberFieldHandler(event, object)
 {
     // controla um campo numerico
@@ -107,8 +123,8 @@ function numberFieldHandler(event, object)
     }else
         {
             if(secondStatement)
-            {
-                status = true;
+            {                
+                status = true;                
             }
         }
        
