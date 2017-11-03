@@ -667,6 +667,8 @@ vertical-drop-down-menu .menu-items li { position: relative; display: block; }
     background-color: rgba(0,0,0,0.8);
 }
 
+#top-icon { display: none; }
+
 .menu-items ul { position: absolute; display: none; z-index: 1; }
 .vertical-drop-down-menu .menu-items ul { position: relative; display: none; }
 .menu-items li:hover ul { display: block; }
@@ -1187,4 +1189,4 @@ form input[type=radio], form input[type=checkbox] { width: 25px; height: 25px; b
 
 form input[type=text]:focus, form input[type=password]:focus, form input[type=search]:focus, form input[type=email]:focus, 
 form input[type=number]:focus, form input[type=date]:focus, form input[type=month]:focus, form input[type=datetime-local]:focus,
-form input[type=color]:focus { border: 1px solid transparent; border-bottom: 1px solid #000000; }
+form input[type=color]:focus { outline: none; border: 1px solid transparent; border-bottom: 1px solid #000000; }
