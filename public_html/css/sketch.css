@@ -552,6 +552,14 @@ form, .container, .panel, .row, .small-box, .medium-box, .large-box, .jumbo-box,
 .stronger-opacity { opacity: 0.95; }
 .no-transparent { opacity: 1; }
 
+/* modals */
+.simple-modal, .simple-modal .modal-background { top: 0 } 
+.simple-modal, .simple-modal .modal-range, .simple-modal .modal-background { position: fixed; } 
+.simple-modal, .simple-modal .modal-background { width: 100%; height: 100%; }
+.simple-modal .modal-background { background-color: rgba(0,0,0,0.7); }
+.simple-modal .modal-header .modal-close-button:hover { background-color: dodgerblue; color: white; }
+
+
 /* menus de navegacao */
 .navigator-menu 
 { 
@@ -1025,6 +1033,9 @@ vertical-drop-down-menu .menu-items li { position: relative; display: block; }
     .col-s-10 { width: 83.33%; }
     .col-s-11 { width: 91.66%; }
     .col-s-12 { width: 100%; }
+	
+	/* modals */	
+	.simple-modal .modal-range { position: absolute; left: 0%; top: 0%; -webkit-transform: translate(-0%,-0%); transform: translate(-0%,-0%); } 
     
     /* retira o efeito de hover */
     .menu-items li:hover ul { display: none; }    

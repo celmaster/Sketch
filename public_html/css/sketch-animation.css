@@ -23,6 +23,8 @@
 .rotate { -webkit-animation: rotate linear 1s; animation: rotate linear 1s; }
 .slide-bottom-to-top { position: absolute; -webkit-animation: slide-bottom-to-top linear 1s; animation: slide-bottom-to-top linear 1s; }
 .slide-top-to-bottom { position: absolute; bottom: 0; -webkit-animation: slide-top-to-bottom linear 1s reverse; animation: slide-top-to-bottom linear reverse 1s; }
+.top-to-bottom { -webkit-animation: top-to-bottom linear 1s; animation: top-to-bottom linear 1s; }
+.top-to-bottom-fade-in { -webkit-animation: top-to-bottom-fade-in linear 1s; animation: top-to-bottom-fade-in linear 1s; }
 .close-curtain { position: absolute; top: 100%; -webkit-animation: close-curtain linear 1s; animation: close-curtain linear 1s; }
 .open-curtain { position: absolute; top: 100%; -webkit-animation: close-curtain  linear 1s reverse; animation: close-curtain linear 1s reverse; }
 .slide-left-to-right { position: absolute; left: 0; -webkit-animation: slide-left-to-right linear 1s; animation: slide-left-to-right linear 1s; }
@@ -233,6 +235,30 @@
 {
     0%   { top: -100%; }
     100% { top: 0%; }
+}
+
+@keyframes top-to-bottom
+{   
+    0%   { top: -50%; }
+    100% { top: 50%; }
+}
+
+@-webkit-keyframes top-to-bottom
+{
+    0%   { top: -50%; }
+    100% { top: 50%; }
+}
+
+@keyframes top-to-bottom-fade-in
+{   
+    0%   { top: -50%; opacity: 0; }
+    100% { top: 50%; opacity: 1; }
+}
+
+@-webkit-keyframes top-to-bottom-fade-in
+{
+    0%   { top: -50%; opacity: 0; }
+    100% { top: 50%; opacity: 1; }
 }
 
 @keyframes slide-top-to-bottom
