@@ -5,6 +5,7 @@
  */
 
 // declaracao de variaveis globais
+var SketchJQ = $.noConflict();
 var imageViewLength = null;
 var imageViewPrior = null;
 var imageViewNext = null;
@@ -15,11 +16,96 @@ var position = 1;
 var sliderGroup = null;
 var sliders = null;
 var menuIsOpen = false;
+var navigatorIsOpen = false;
 
 // funcoes globais
 
 // declaracao de funcoes
-// declaracao de funcoes
+function cleanForm(idForm)
+{
+    // limpa os dados de campos/areas de texto e passwords de um formulario
+    // declaracao de variaveis
+    var inputTexts;
+    var textArea;
+
+    if (document.getElementById(idForm))
+    {
+
+        inputTexts = document.getElementsByTagName("INPUT");
+        textArea = document.getElementsByTagName("TEXTAREA");
+
+        for (var i = 0; i < inputTexts.length; i++)
+        {
+
+            if ((inputTexts[i].getAttribute("type") == "text") ||
+                    (inputTexts[i].getAttribute("type") == "password") ||
+                    (inputTexts[i].getAttribute("type") == "number"))
+            {
+                document.getElementById(inputTexts[i].getAttribute("id")).value = "";
+            }
+        }
+
+        for (var i = 0; i < textArea.length; i++)
+        {
+            document.getElementById(textArea[i].getAttribute("id")).value = "";
+        }
+    }
+
+}
+
+function cleanField(id)
+{
+    // limpa um campo
+    if(exist(id))
+    {
+        document.getElementById(id).value = "";
+    }
+}
+
+function putContentInBlock(id, content)
+{
+    // insere um conteudo em um objeto
+    if (exist(id))
+    {
+        var target = document.getElementById(id);
+        target.innerHTML = content;
+    }
+}
+
+function copyContentInBlockById(sourceId, targetId)
+{
+    // copia o conteudo de um objeto para outro via id
+    if (exist(sourceId) && exist(targetId))
+    {
+        var source = document.getElementById(sourceId);
+        var target = document.getElementById(targetId);
+
+        target.innerHTML = source.innerHTML;
+    }
+}
+
+function copyValueInBlockById(sourceId, targetId)
+{
+    // copia o conteudo de um campo de um objeto para outro via id
+    if (exist(sourceId) && exist(targetId))
+    {
+        var source = document.getElementById(sourceId);
+        var target = document.getElementById(targetId);
+
+        target.innerHTML = source.value;
+    }
+}
+
+function putContentInField(id, content)
+{
+    // insere um conteudo em um objeto
+    if (exist(id))
+    {
+        var target = document.getElementById(id);
+        target.value = content;
+    }
+}
+
 function exist(id)
 {
     // verifica se o id de um elemento existe
@@ -27,15 +113,15 @@ function exist(id)
     {
         return true;
     } else
-        {
-            return false;
-        }
+    {
+        return false;
+    }
 }
 
 function submitForm(id)
 {
     // envia um formulario
-    if(exist(id))
+    if (exist(id))
     {
         var form = document.getElementById(id);
         form.submit();
@@ -61,11 +147,11 @@ function createMask(id, mask)
         {
             formattedText = new String(formattedText.concat(text.charAt(position)));
 
-        }else
-            {
-                formattedText = formattedText.concat(maskText.charAt(position));
-                formattedText = formattedText.concat(text.charAt(position));
-            }
+        } else
+        {
+            formattedText = formattedText.concat(maskText.charAt(position));
+            formattedText = formattedText.concat(text.charAt(position));
+        }
 
 
         // colocando o valor obtido no campo referenciado
@@ -77,15 +163,27 @@ function createMask(id, mask)
 function decimalBoundHandler(obj, decimalBound)
 {
     var str = obj.value;
-    if(str.indexOf(".") > -1)
-    {    
+    if (str.indexOf(".") > -1)
+    {
         // verifica se a quantidade de casas decimais estao dentro do limite
         var decimals = str.split(".");
-        if(decimals[1].length > decimalBound)
+        if (decimals[1].length > decimalBound)
         {
-            str = str.substr(0,(str.indexOf(".")+decimalBound+1));
+            str = str.substr(0, (str.indexOf(".") + decimalBound + 1));
         }
-        
+
+        obj.value = str;
+    }
+
+    if (str.indexOf(",") > -1)
+    {
+        // verifica se a quantidade de casas decimais estao dentro do limite
+        var decimals = str.split(",");
+        if (decimals[1].length > decimalBound)
+        {
+            str = str.substr(0, (str.indexOf(",") + decimalBound + 1));
+        }
+
         obj.value = str;
     }
 }
@@ -96,73 +194,75 @@ function numberFieldHandler(event, object)
     // declaracao de variaveis
     var characterTyped = event.which || event.keyCode;
     var isNumber = (characterTyped >= 48) && (characterTyped <= 57) && !event.ctrlKey;
-    var isDot = (event.which === 46) && (event.keyCode === 0);
+    var isDot = (event.which === 44) || (event.which === 46) || (event.keyCode === 194) || (event.keyCode === 190) || (event.keyCode === 188) || (event.keyCode === 110);
     var isDirectional = (characterTyped >= 37) && (characterTyped <= 40);
     var isDelete = (event.which === 0) && (event.keyCode === 46);
     var isBackspace = characterTyped === 8;
     var isEnd = characterTyped === 35;
     var isHome = characterTyped === 36;
-    var isCommand = event.ctrlKey;    
-    var str = object.value;    
+    var isCommand = event.ctrlKey;
+    var str = object.value;
+    var hasComma = str.indexOf(",") > -1;
     var hasDot = str.indexOf(".") > -1;
-    
+    var hasSignal = hasComma || hasDot;
+
     // constroi a primeira premissa
-    var firstStatement = isNumber || isDirectional || isDelete 
-                    || isBackspace || isEnd || isHome || isCommand;     
-    
+    var firstStatement = isNumber || isDirectional || isDelete
+            || isBackspace || isEnd || isHome || isCommand;
+
     // constroi a segunda premissa
-    var secondStatement = !hasDot && isDot;
-    
+    var secondStatement = !hasSignal && isDot;
+
     // variavel logica utilizada para indicar bloqueio ou liberação do caractere de entrada do usuario
-    var status = false;    
-    
+    var status = false;
+
     // processamento logico das premissas
-    if(firstStatement && !isDot)
-    {       
-        status = true;     
-    }else
+    if (firstStatement && !isDot)
+    {
+        status = true;
+    } else
+    {
+        if (secondStatement)
         {
-            if(secondStatement)
-            {                
-                status = true;                
-            }
+            status = true;
         }
-       
-    
+    }
+
+
     // retorno de valor
-    return status;   
+    return status;
 }
 
 function validateLimit(begin, end, value)
 {
     // avalia se um valor esta dentro de um limite 
-    if((value >= begin) && (value <= end))
+    if ((value >= begin) && (value <= end))
     {
         return true;
-    }else
-        {
-            return false;
-        }
+    } else
+    {
+        return false;
+    }
 }
 
 function isPositive(value)
 {
     // verifica se um numero e positivo
-    if(value >= 0)
-    {    
+    if (value >= 0)
+    {
         return true;
 
-    }else
-        {
-            return false;
-        }
-	
+    } else
+    {
+        return false;
+    }
+
 }
 
 function isDate(value)
 {
     // verifica se um valor e uma data valida
-    var text = value; 
+    var text = value;
     var day = parseInt(text.substring(0, 2));
     var month = parseInt(text.substring(3, 5));
     var year = parseInt(text.substring(6, 10));
@@ -172,12 +272,12 @@ function isDate(value)
 
     var isMonth29Days = ((day >= 1) && (day <= 29)) && (month === 2) && (year % 4 === 0);
 
-    var isMonth30Days = ((month === 4) || (month === 6) || (month === 9) || 
-                         (month === 11)) && ((day >= 1) && (day <= 30));
+    var isMonth30Days = ((month === 4) || (month === 6) || (month === 9) ||
+            (month === 11)) && ((day >= 1) && (day <= 30));
 
-    var isMonth31Days = ((month === 1) || (month === 3) || (month === 5) || 
-                         (month === 7) || (month === 8) || (month === 10) || 
-                         (month === 12)) && ((day >= 1) && (day <= 31));
+    var isMonth31Days = ((month === 1) || (month === 3) || (month === 5) ||
+            (month === 7) || (month === 8) || (month === 10) ||
+            (month === 12)) && ((day >= 1) && (day <= 31));
 
 
     // criando uma avaliacao das proposicoes
@@ -185,20 +285,20 @@ function isDate(value)
 
     // retorno de valor
     return evaluate;
-	
+
 }
 
 function isTime(value)
 {
     // verifica se um valor e um horario valido
-    var text = value; 
+    var text = value;
     var hour = parseInt(text.substring(0, 2));
     var minute = parseInt(text.substring(3, 5));
     var second = parseInt(text.substring(6, 8));
 
     // montando proposicoes
-    var isHour = ((hour >= 0) && (hour <= 23));        
-    var isMinute = ((minute >= 0) && (minute <= 59));    
+    var isHour = ((hour >= 0) && (hour <= 23));
+    var isMinute = ((minute >= 0) && (minute <= 59));
     var isSecond = ((second >= 0) && (second <= 59));
 
     // criando uma avaliacao das proposicoes
@@ -206,7 +306,7 @@ function isTime(value)
 
     // retorno de valor
     return evaluate;
-	
+
 }
 
 function getObject(id)
@@ -214,12 +314,12 @@ function getObject(id)
     // retorna a instancia de um objeto
     // declaracao de variaveis
     var obj = null;
-    
-    if(exist(id))
+
+    if (exist(id))
     {
         obj = document.getElementById(id);
     }
-    
+
     // retorno de valor
     return obj;
 }
@@ -244,48 +344,46 @@ function display(id, isVisible)
 
 function show(id)
 {
-   // torna um elemento visivel
-   display(id, true);   
+    // torna um elemento visivel
+    display(id, true);
 }
 
 function hide(id)
 {
-   // torna um elemento invisivel   
-   display(id, false);   
+    // torna um elemento invisivel   
+    display(id, false);
 }
 
-function openNavigator(id)
+function openNavigator(object)
 {
     // abre o navegador de recursos
-    if(exist(id))
-    {
-        display(id, true);
+    SketchJQ(object).siblings().show();
         
-        // anula o overflow do corpo do documento
-        document.body.style.overflow = "hidden";
-    }
+    // altera o valor da variavel logica
+    navigatorIsOpen = true;
+
+    // anula o overflow do corpo do documento
+    document.body.style.overflow = "hidden";
 }
 
-function closeNavigator(id)
+function closeNavigator(object)
 {
     // fecha o navegador de recursos
-    if(exist(id))
-    {
-        display(id, false);
+    SketchJQ(object).parents(".navigator-menu").hide();
         
-        // reseta o overflow do corpo do documento
-        document.body.style.overflow = "auto";
-    }
+    // altera o valor da variavel logica
+    navigatorIsOpen = false;
+
+    // estabelece o overflow do corpo do documento
+    document.body.style.overflow = "auto";
 }
 
-function closeMenu()
+function closeMenu(object)
 {
     // fecha o menu de uma aplicacao
-    display("menu-icon", true);
-    display("menu-close-button", false);
-    display("background-menu", false);
-    display("menu", false);
-    display("menu-top-icon", false);
+    SketchJQ(object).hide();
+    var menu = SketchJQ(object).siblings().hide();
+    SketchJQ("div.menu-icon").show();
 
     // altera o valor da variavel logica
     menuIsOpen = false;
@@ -294,15 +392,12 @@ function closeMenu()
     document.body.style.overflow = "auto";
 }
 
-function openMenu()
+function openMenu(object)
 {
     // abre o menu de uma aplicacao
-    display("menu-icon", false);
-    display("menu-close-button", true);
-    display("background-menu", true);
-    display("menu", true);
-    display("menu-top-icon", true);
-
+    SketchJQ(object).hide();
+    var menu = SketchJQ(object).siblings().show();        
+        
     // altera o valor da variavel logica
     menuIsOpen = true;
 
@@ -324,19 +419,19 @@ function estabilishMenu()
 
         // reseta o overflow do corpo do documento
         document.body.style.overflow = "auto";
-    }else
+    } else
+    {
+        if (!menuIsOpen)
         {
-            if (!menuIsOpen)
-            {
-                display("menu-icon", true);
-                display("menu", false);
-            }else
-                {
-                    openMenu();
-                }
-                
-            display("top-icon", false);    
+            display("menu-icon", true);
+            display("menu", false);
+        } else
+        {
+            openMenu();
         }
+
+        display("top-icon", false);
+    }
 }
 
 function navLink(id)
@@ -378,20 +473,20 @@ function closePresentation(presentationId)
 {
     // fecha a apresentacao de imagens
     display(presentationId, false);
-	
-	// altera o valor da variavel logica indicando que o visualizador de imagens esta fechado
-	imageViewIsOpen = false;
+
+    // altera o valor da variavel logica indicando que o visualizador de imagens esta fechado
+    imageViewIsOpen = false;
 
     // reseta o overflow do corpo do documento
     document.body.style.overflow = "auto";
-    
+
     // faz o top-icon ficar visivel caso a scrollbar tenha sido ativada
-    if((window.pageYOffset !== 0) || (document.documentElement.scrollTop !== 0))
+    if ((window.pageYOffset !== 0) || (document.documentElement.scrollTop !== 0))
     {
         if (window.innerWidth > 480)
         {
-            if(exist("top-icon"))
-            {          
+            if (exist("top-icon"))
+            {
                 display("top-icon", true);
             }
         }
@@ -415,17 +510,17 @@ function showPresentationNavButtons()
     {
         display("prior-button", true);
     } else
-        {
-            display("prior-button", false);
-        }
+    {
+        display("prior-button", false);
+    }
 
     if (imageViewNext <= imageViewLength)
     {
         display("next-button", true);
     } else
-        {
-            display("next-button", false);
-        }
+    {
+        display("next-button", false);
+    }
 }
 
 function prior(viewerId, imageListId, presentationId)
@@ -447,7 +542,7 @@ function next(viewerId, imageListId, presentationId)
 function viewById(imageId, viewerId, imageListId, presentationId)
 {
     // visualiza uma imagem por seu id
-    if(exist(imageId))
+    if (exist(imageId))
     {
         var image = document.getElementById(imageId);
         view(image, viewerId, imageListId, presentationId);
@@ -468,26 +563,26 @@ function view(object, viewerId, imageListId, presentationId)
     {
         // anula o overflow do corpo do documento
         document.body.style.overflow = "hidden";
-		
-		// armazena a descricao da imagem
-		var caption = "";
-		
-		// obtem o indice da imagem para navegar para outras imagens
-		var imageIndex = parseInt(object.id.substring(object.id.lastIndexOf("-") + 1));
-		setImageViewPrior(imageIndex - 1);
-		setImageViewNext(imageIndex + 1);
-		
-		//verifica se a descricao da imagem foi dada pelo desenvolvedor/designer
-		if(exist("image-caption-"+imageIndex))
-		{
-			caption = document.getElementById("image-caption-"+imageIndex).innerHTML;
-		}else
-			{
-				caption = "Foto " + imageIndex;
-			}
-        
+
+        // armazena a descricao da imagem
+        var caption = "";
+
+        // obtem o indice da imagem para navegar para outras imagens
+        var imageIndex = parseInt(object.id.substring(object.id.lastIndexOf("-") + 1));
+        setImageViewPrior(imageIndex - 1);
+        setImageViewNext(imageIndex + 1);
+
+        //verifica se a descricao da imagem foi dada pelo desenvolvedor/designer
+        if (exist("image-caption-" + imageIndex))
+        {
+            caption = document.getElementById("image-caption-" + imageIndex).innerHTML;
+        } else
+        {
+            caption = "Foto " + imageIndex;
+        }
+
         // exibe a legenda da imagem caso o elemento image-caption exista
-        if(exist("image-caption"))
+        if (exist("image-caption"))
         {
             document.getElementById("image-caption").innerText = caption;
         }
@@ -506,12 +601,12 @@ function view(object, viewerId, imageListId, presentationId)
 
         // exibe os navegadores
         showPresentationNavButtons();
-        
+
         // faz o top-icon ficar oculto
         display("top-icon", false);
-		
-		// altera o valor da variavel logica indicando que o visualizador de imagens esta aberto
-		imageViewIsOpen = true;
+
+        // altera o valor da variavel logica indicando que o visualizador de imagens esta aberto
+        imageViewIsOpen = true;
     }
 }
 
@@ -519,67 +614,50 @@ function playSlider(slider, time, index)
 {
     // apresenta slides
     // obtem os sliders caso o vetor destes nao tenha sido inicializado
-    slides = slider.getElementsByClassName("slide");					
-    
+    slides = slider.getElementsByClassName("slide");
+
     for (var i = 0; i < slides.length; i++)
-	{
-		slides[i].style.display = "none";
-	}
-	
-	slides[index].style.display = "block";
+    {
+        slides[i].style.display = "none";
+    }
+
+    slides[index].style.display = "block";
 
 
-	if (index < (slides.length - 1))
-	{
-		index++;
-	} else
-		{
-			index = 0;
-		}			
-		
+    if (index < (slides.length - 1))
+    {
+        index++;
+    } else
+    {
+        index = 0;
+    }
 
-	// executa a apresentacao com chamadas recursivas    
-	window.setTimeout(function(){playSlider(slider, time, index);}, time);
+
+    // executa a apresentacao com chamadas recursivas    
+    window.setTimeout(function () {
+        playSlider(slider, time, index);
+    }, time);
 }
 
 function topLinkHandler()
 {
     // gerencia os eventos do link de subida ao topo do site
-    if((window.pageYOffset === 0) || (document.documentElement.scrollTop === 0))
+    if ((window.pageYOffset === 0) || (document.documentElement.scrollTop === 0))
     {
-        if(exist("top-icon"))
-        {          
+        if (exist("top-icon"))
+        {
             display("top-icon", false);
         }
-    }else
-        {
-            if (window.innerWidth > 480)
-            {
-              if((exist("top-icon")) && (!imageViewIsOpen))
-              {              
-                 display("top-icon", true);              
-              }else
-                  {
-                      display("top-icon", false);
-                  }
-            }
-        }
-}
-
-function hideSubMenu(obj)
-{
-    // exibe o sub-menu
-    // declaração de variaveis
-    var menu = document.getElementById("menu-items");
-    var items = menu.getElementsByTagName("UL");
-    for(var i = 0; i < items.length; i++)
+    } else
     {
-        if(items[i].id !== "")
+        if (window.innerWidth > 480)
         {
-            if(items[i].id !== obj.id)
+            if ((exist("top-icon")) && (!imageViewIsOpen))
             {
-               items[i].style.display = "none";
-               items[i].removeAttribute("style");
+                display("top-icon", true);
+            } else
+            {
+                display("top-icon", false);
             }
         }
     }
@@ -587,67 +665,151 @@ function hideSubMenu(obj)
 
 function initSliders()
 {
-	// inicializa todos os sliders
-	if(exist("slider-data"))
-	{
-		// obtem os sliders presentes na tela
-		var arrayOfIds = JSON.parse(document.getElementById("slider-data").innerHTML);
-		var slider = null;
-		var time;
-		for(var i = 0; i < arrayOfIds.length; i++)
-		{
-			if(exist(arrayOfIds[i].id))
-			{
-				slider = document.getElementById(arrayOfIds[i].id);	
-				time = Math.abs(parseInt(arrayOfIds[i].time));
-				playSlider(slider, time, 0);
-			}	
-		}		
-		
-	}
-}
-
-function handleMainMenuByEvent(event)
-{
-	// controla a nevegacao dos sub-menus pelo menu drop-down por meio de toque/clique 
-    // declaracao de variaveis
-    var obj = event.target;    
-    var submenu = obj.parentNode.getElementsByTagName("UL")[0];
-
-    if(submenu !== null)
+    // inicializa todos os sliders
+    if (exist("slider-data"))
     {
-        var strId = submenu.id;
-
-        if(strId.search("sub-menu-") > -1)
+        // obtem os sliders presentes na tela
+        var arrayOfIds = JSON.parse(document.getElementById("slider-data").innerHTML);
+        var slider = null;
+        var time;
+        for (var i = 0; i < arrayOfIds.length; i++)
         {
-            if((submenu.style.display === "none") || (submenu.style.display === ""))
+            if (exist(arrayOfIds[i].id))
             {
-                submenu.style.display = "block";
-                hideSubMenu(submenu);            
-            }else
-                {
-                    submenu.style.display = "none";
-                    submenu.removeAttribute("style");
-                }				
+                slider = document.getElementById(arrayOfIds[i].id);
+                time = Math.abs(parseInt(arrayOfIds[i].time));
+                playSlider(slider, time, 0);
+            }
         }
 
     }
 }
 
 // ----> listeners
-window.addEventListener("resize", function (){
-    estabilishMenu();
-});
-window.addEventListener("load", function (){
-	initSliders();
+window.addEventListener("load", function () {
+    initSliders();
 });
 
-window.addEventListener("scroll", function(){
-	topLinkHandler();
+window.addEventListener("scroll", function () {
+    topLinkHandler();
 });
 
-window.addEventListener("click", function(event){
-	handleMainMenuByEvent(event);
+SketchJQ(document).ready(function(){
+    SketchJQ("li p").click(function(){
+        
+        // controla a exibicao dos submenus
+        var submenu = SketchJQ(this).siblings("ul.sub-menu");
+        
+        if(submenu != null)
+        {
+            var display = submenu.css("display");
+            
+            if(display == "none")
+            {
+                SketchJQ("ul.sub-menu").hide();
+                submenu.show();
+            }else
+                {
+                    submenu.hide();
+                }
+        }
+    });
+    
 });
+
+SketchJQ(document).ready(function(){
+    SketchJQ("div.menu-icon").click(function(){
+        // exibe o menu
+        openMenu(this);
+    });
+});
+
+SketchJQ(document).ready(function(){
+    SketchJQ("div.close-icon").click(function(){
+        // fecha o menu
+        closeMenu(this);
+    });
+});
+
+SketchJQ(document).ready(function(){
+    SketchJQ("div.menu-top-icon").click(function(){
+        // fecha o menu
+        closeMenu(this);
+    });
+})
+
+SketchJQ(document).ready(function(){
+    SketchJQ("div.menu").click(function(){
+        /* fecha o menu quando o usuario disparar o evento de click
+         * das opcoes de navegacao
+         */
+        if(window.innerWidth <= 480)
+        {
+            closeMenu(this);
+        }
+    });
+});
+
+SketchJQ(document).ready(function(){
+    SketchJQ(window).resize(function(){
+        // controla a exibicao do menu quando a janela eh redimensionada
+        if (window.innerWidth > 480)
+        {
+            SketchJQ("div.menu").siblings().hide();
+            SketchJQ("div.menu").show();           
+            
+            // reseta o overflow do corpo do documento
+            if(!navitagorIsOpen)
+            {
+                document.body.style.overflow = "auto";
+            }
+        } else
+            {
+                if (!menuIsOpen)
+                {
+                    SketchJQ("div.menu-icon").show();                    
+                    SketchJQ("div.menu-icon").siblings().hide();
+                } else
+                    {
+                        SketchJQ("div.menu-icon").hide();
+                        SketchJQ("div.menu-icon").siblings().show();
+                        
+                        // altera o valor da variavel logica
+                        menuIsOpen = true;
+
+                        // anula o overflow do corpo do documento
+                        document.body.style.overflow = "hidden";
+                    }
+
+                SketchJQ("div.top-icon").hide();
+            }
+    });
+});
+
+SketchJQ(document).ready(function(){    
+    SketchJQ(".navigator-menu-open-button").click(function(){
+        // abre o menu de navegacao
+        openNavigator(this);
+    });
+});
+
+SketchJQ(document).ready(function(){    
+    SketchJQ(".navigator-menu-close-button").click(function(){
+        // fecha o menu de navegacao
+        closeNavigator(this);
+    });
+});
+
+SketchJQ(document).ready(function(){
+    SketchJQ("ul.navigator-items p").click(function(){
+        /* fecha o menu de navegacao quando o usuario disparar o evento de click
+         * das opcoes de navegacao
+         */
+        
+        closeNavigator(SketchJQ(".navigator-menu-close-button"));
+    });
+});
+
+
 
 // ----> threads
