@@ -1,11 +1,11 @@
 /* Sketch: um framework responsivo simples e leve para paginas HTML  
  *
  * Marcelo Barbosa,
- * maio, 2017.
+ * fevereiro, 2018.
  */
 
 /* ------ Importacoes ------ */
-@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css); 
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
 
 /* ------ Declaracoes globais ------ */ 
 * { box-sizing: border-box; margin: 0; font-family: Arial, Verdana, Sans-serif; }
@@ -429,9 +429,26 @@ form, .container, .panel, .row, .small-box, .medium-box, .large-box, .jumbo-box,
 .text-section p { padding: 4px; }
 
 /* codigo */
-.code { counter-reset: line; position: relative; display: block; margin: 0; padding: 0; border-left: 7px solid gray; }
-.code .line { display: block; padding: 8px; }
-.code span.line:nth-child(odd){ background-color: #f2f2f2; }
+.code { position: relative; display: block; margin: 0; padding: 0; font-family: Inconsolata; }
+.code .dark-theme { background-color: #2A2A2A; border-left: 7px solid gray; }
+.code .light-theme { background-color: #FEFFFF; border-left: 7px solid gray; }
+.code .light-theme, .code .dark-theme { padding: 16px; }
+.code p { padding: 0; }
+
+.code .dark-theme p, .code .dark-theme span, .code .dark-theme span.text { color: white; font-family: Inconsolata; }
+.code .dark-theme span.comment { color: paleturquoise; }
+.code .dark-theme span.keyword, .code .dark-theme span.boolean, .code .dark-theme span.tag  { color: red; }
+.code .dark-theme span.char, .code .dark-theme span.string, .code .dark-theme span.attribute { color: yellow; }
+.code .dark-theme span.attribute-value { color: orange; }
+.code .dark-theme span.number { color: lime; }
+
+.code .light-theme p, .code .light-theme span, .code .light-theme span.text { color: #000000; font-family: Inconsolata; }
+.code .light-theme span.comment { color: deepskyblue; }
+.code .light-theme span.keyword, .code .light-theme span.boolean, .code .light-theme span.tag { color: blue; }
+.code .light-theme span.char, .code .light-theme span.string, .code .light-theme span.attribute { color: crimson; }
+.code .light-theme span.attribute-value { color: magenta; }
+.code .light-theme span.number { color: limegreen; }
+
 
 /* blocos de conteudo */
 .content-in-one-column { -webkit-column-count: 1; -moz-column-count: 1; column-count: 1; }
