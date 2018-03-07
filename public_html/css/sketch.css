@@ -936,9 +936,6 @@ form, .container, .panel, .row, .small-box, .medium-box, .large-box, .jumbo-box,
 
 @media only screen and (max-width: 768px) /* tablets de alta resolucao */
 {	 
-    /* todas as colunas passam a ter largura de 100%*/
-    [class*="col-"] { width: 100%; } 
-    
     /* colunas para mobile */
     .col-mh-1 { width: 8.33%; }
     .col-mh-2 { width: 16.66%; }
@@ -981,10 +978,7 @@ form, .container, .panel, .row, .small-box, .medium-box, .large-box, .jumbo-box,
 }
 
 @media only screen and (max-width: 600px) /* tablets e smartphones */
-{
-    /* todas as colunas passam a ter largura de 100%*/
-    [class*="col-"] { width: 100%; } 
-    
+{	 
     /* colunas para mobile */
     .col-m-1 { width: 8.33%; }
     .col-m-2 { width: 16.66%; }
