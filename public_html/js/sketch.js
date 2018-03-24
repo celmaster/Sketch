@@ -759,7 +759,7 @@ SketchJQ(document).ready(function(){
             SketchJQ("div.menu").show();           
             
             // reseta o overflow do corpo do documento
-            if(!navitagorIsOpen)
+            if(!navigatorIsOpen)
             {
                 document.body.style.overflow = "auto";
             }
