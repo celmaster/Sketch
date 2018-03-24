@@ -5,7 +5,6 @@
  */
 
 // declaracao de variaveis globais
-var SketchJQ = $.noConflict();
 var imageViewLength = null;
 var imageViewPrior = null;
 var imageViewNext = null;
@@ -357,7 +356,7 @@ function hide(id)
 function openNavigator(object)
 {
     // abre o navegador de recursos
-    SketchJQ(object).siblings().show();
+    $(object).siblings().show();
         
     // altera o valor da variavel logica
     navigatorIsOpen = true;
@@ -369,7 +368,7 @@ function openNavigator(object)
 function closeNavigator(object)
 {
     // fecha o navegador de recursos
-    SketchJQ(object).parents(".navigator-menu").hide();
+    $(object).parents(".navigator-menu").hide();
         
     // altera o valor da variavel logica
     navigatorIsOpen = false;
@@ -381,9 +380,9 @@ function closeNavigator(object)
 function closeMenu(object)
 {
     // fecha o menu de uma aplicacao
-    SketchJQ(object).hide();
-    var menu = SketchJQ(object).siblings().hide();
-    SketchJQ("div.menu-icon").show();
+    $(object).hide();
+    var menu = $(object).siblings().hide();
+    $("div.menu-icon").show();
 
     // altera o valor da variavel logica
     menuIsOpen = false;
@@ -395,8 +394,8 @@ function closeMenu(object)
 function openMenu(object)
 {
     // abre o menu de uma aplicacao
-    SketchJQ(object).hide();
-    var menu = SketchJQ(object).siblings().show();        
+    $(object).hide();
+    var menu = $(object).siblings().show();        
         
     // altera o valor da variavel logica
     menuIsOpen = true;
@@ -694,11 +693,11 @@ window.addEventListener("scroll", function () {
     topLinkHandler();
 });
 
-SketchJQ(document).ready(function(){
-    SketchJQ("li p").click(function(){
+$(document).ready(function(){
+    $("li p").click(function(){
         
         // controla a exibicao dos submenus
-        var submenu = SketchJQ(this).siblings("ul.sub-menu");
+        var submenu = $(this).siblings("ul.sub-menu");
         
         if(submenu != null)
         {
@@ -706,7 +705,7 @@ SketchJQ(document).ready(function(){
             
             if(display == "none")
             {
-                SketchJQ("ul.sub-menu").hide();
+                $("ul.sub-menu").hide();
                 submenu.show();
             }else
                 {
@@ -717,29 +716,29 @@ SketchJQ(document).ready(function(){
     
 });
 
-SketchJQ(document).ready(function(){
-    SketchJQ("div.menu-icon").click(function(){
+$(document).ready(function(){
+    $("div.menu-icon").click(function(){
         // exibe o menu
         openMenu(this);
     });
 });
 
-SketchJQ(document).ready(function(){
-    SketchJQ("div.close-icon").click(function(){
+$(document).ready(function(){
+    $("div.close-icon").click(function(){
         // fecha o menu
         closeMenu(this);
     });
 });
 
-SketchJQ(document).ready(function(){
-    SketchJQ("div.menu-top-icon").click(function(){
+$(document).ready(function(){
+    $("div.menu-top-icon").click(function(){
         // fecha o menu
         closeMenu(this);
     });
 })
 
-SketchJQ(document).ready(function(){
-    SketchJQ("div.menu").click(function(){
+$(document).ready(function(){
+    $("div.menu").click(function(){
         /* fecha o menu quando o usuario disparar o evento de click
          * das opcoes de navegacao
          */
@@ -750,13 +749,13 @@ SketchJQ(document).ready(function(){
     });
 });
 
-SketchJQ(document).ready(function(){
-    SketchJQ(window).resize(function(){
+$(document).ready(function(){
+    $(window).resize(function(){
         // controla a exibicao do menu quando a janela eh redimensionada
         if (window.innerWidth > 480)
         {
-            SketchJQ("div.menu").siblings().hide();
-            SketchJQ("div.menu").show();           
+            $("div.menu").siblings().hide();
+            $("div.menu").show();           
             
             // reseta o overflow do corpo do documento
             if(!navigatorIsOpen)
@@ -767,12 +766,12 @@ SketchJQ(document).ready(function(){
             {
                 if (!menuIsOpen)
                 {
-                    SketchJQ("div.menu-icon").show();                    
-                    SketchJQ("div.menu-icon").siblings().hide();
+                    $("div.menu-icon").show();                    
+                    $("div.menu-icon").siblings().hide();
                 } else
                     {
-                        SketchJQ("div.menu-icon").hide();
-                        SketchJQ("div.menu-icon").siblings().show();
+                        $("div.menu-icon").hide();
+                        $("div.menu-icon").siblings().show();
                         
                         // altera o valor da variavel logica
                         menuIsOpen = true;
@@ -781,32 +780,32 @@ SketchJQ(document).ready(function(){
                         document.body.style.overflow = "hidden";
                     }
 
-                SketchJQ("div.top-icon").hide();
+                $("div.top-icon").hide();
             }
     });
 });
 
-SketchJQ(document).ready(function(){    
-    SketchJQ(".navigator-menu-open-button").click(function(){
+$(document).ready(function(){    
+    $(".navigator-menu-open-button").click(function(){
         // abre o menu de navegacao
         openNavigator(this);
     });
 });
 
-SketchJQ(document).ready(function(){    
-    SketchJQ(".navigator-menu-close-button").click(function(){
+$(document).ready(function(){    
+    $(".navigator-menu-close-button").click(function(){
         // fecha o menu de navegacao
         closeNavigator(this);
     });
 });
 
-SketchJQ(document).ready(function(){
-    SketchJQ("ul.navigator-items p").click(function(){
+$(document).ready(function(){
+    $("ul.navigator-items p").click(function(){
         /* fecha o menu de navegacao quando o usuario disparar o evento de click
          * das opcoes de navegacao
          */
         
-        closeNavigator(SketchJQ(".navigator-menu-close-button"));
+        closeNavigator($(".navigator-menu-close-button"));
     });
 });
 
