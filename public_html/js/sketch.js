@@ -15,7 +15,6 @@ var position = 1;
 var sliderGroup = null;
 var sliders = null;
 var menuIsOpen = false;
-var navigatorIsOpen = false;
 
 // funcoes globais
 
@@ -353,36 +352,38 @@ function hide(id)
     display(id, false);
 }
 
-function openNavigator(object)
+function openNavigator(id)
 {
     // abre o navegador de recursos
-    $(object).siblings().show();
-        
-    // altera o valor da variavel logica
-    navigatorIsOpen = true;
+    if (exist(id))
+    {
+        display(id, true);
 
-    // anula o overflow do corpo do documento
-    document.body.style.overflow = "hidden";
+        // anula o overflow do corpo do documento
+        document.body.style.overflow = "hidden";
+    }
 }
 
-function closeNavigator(object)
+function closeNavigator(id)
 {
     // fecha o navegador de recursos
-    $(object).parents(".navigator-menu").hide();
-        
-    // altera o valor da variavel logica
-    navigatorIsOpen = false;
+    if (exist(id))
+    {
+        display(id, false);
 
-    // estabelece o overflow do corpo do documento
-    document.body.style.overflow = "auto";
+        // reseta o overflow do corpo do documento
+        document.body.style.overflow = "auto";
+    }
 }
 
-function closeMenu(object)
+function closeMenu()
 {
     // fecha o menu de uma aplicacao
-    $(object).hide();
-    var menu = $(object).siblings().hide();
-    $("div.menu-icon").show();
+    display("menu-icon", true);
+    display("menu-close-button", false);
+    display("background-menu", false);
+    display("menu", false);
+    display("menu-top-icon", false);
 
     // altera o valor da variavel logica
     menuIsOpen = false;
@@ -391,12 +392,15 @@ function closeMenu(object)
     document.body.style.overflow = "auto";
 }
 
-function openMenu(object)
+function openMenu()
 {
     // abre o menu de uma aplicacao
-    $(object).hide();
-    var menu = $(object).siblings().show();        
-        
+    display("menu-icon", false);
+    display("menu-close-button", true);
+    display("background-menu", true);
+    display("menu", true);
+    display("menu-top-icon", true);
+
     // altera o valor da variavel logica
     menuIsOpen = true;
 
@@ -662,6 +666,25 @@ function topLinkHandler()
     }
 }
 
+function hideSubMenu(obj)
+{
+    // exibe o sub-menu
+    // declaração de variaveis
+    var menu = document.getElementById("menu-items");
+    var items = menu.getElementsByTagName("UL");
+    for (var i = 0; i < items.length; i++)
+    {
+        if (items[i].id !== "")
+        {
+            if (items[i].id !== obj.id)
+            {
+                items[i].style.display = "none";
+                items[i].removeAttribute("style");
+            }
+        }
+    }
+}
+
 function initSliders()
 {
     // inicializa todos os sliders
@@ -684,7 +707,41 @@ function initSliders()
     }
 }
 
+function handleMainMenuByEvent(event)
+{
+    // controla a nevegacao dos sub-menus pelo menu drop-down por meio de toque/clique 
+    // declaracao de variaveis
+    var obj = event.target;
+    var submenu = obj.parentNode.getElementsByTagName("UL")[0];
+
+    if (submenu !== undefined)
+    {
+        // verifica se o objeto possui id                
+        if (submenu.getAttribute("id") !== null)
+        {
+            var strId = submenu.id;
+
+            if (strId.search("sub-menu-") > -1)
+            {
+                if ((submenu.style.display === "none") || (submenu.style.display === ""))
+                {
+                    submenu.style.display = "block";
+                    hideSubMenu(submenu);
+                } else
+                {
+                    submenu.style.display = "none";
+                    submenu.removeAttribute("style");
+                }
+            }
+        }
+
+    }
+}
+
 // ----> listeners
+window.addEventListener("resize", function () {
+    estabilishMenu();
+});
 window.addEventListener("load", function () {
     initSliders();
 });
@@ -693,122 +750,8 @@ window.addEventListener("scroll", function () {
     topLinkHandler();
 });
 
-$(document).ready(function(){
-    $("li p").click(function(){
-        
-        // controla a exibicao dos submenus
-        var submenu = $(this).siblings("ul.sub-menu");
-        
-        if(submenu != null)
-        {
-            var display = submenu.css("display");
-            
-            if(display == "none")
-            {
-                $("ul.sub-menu").hide();
-                submenu.show();
-            }else
-                {
-                    submenu.hide();
-                }
-        }
-    });
-    
+window.addEventListener("click", function (event) {
+    handleMainMenuByEvent(event);
 });
-
-$(document).ready(function(){
-    $("div.menu-icon").click(function(){
-        // exibe o menu
-        openMenu(this);
-    });
-});
-
-$(document).ready(function(){
-    $("div.close-icon").click(function(){
-        // fecha o menu
-        closeMenu(this);
-    });
-});
-
-$(document).ready(function(){
-    $("div.menu-top-icon").click(function(){
-        // fecha o menu
-        closeMenu(this);
-    });
-})
-
-$(document).ready(function(){
-    $("div.menu").click(function(){
-        /* fecha o menu quando o usuario disparar o evento de click
-         * das opcoes de navegacao
-         */
-        if(window.innerWidth <= 480)
-        {
-            closeMenu(this);
-        }
-    });
-});
-
-$(document).ready(function(){
-    $(window).resize(function(){
-        // controla a exibicao do menu quando a janela eh redimensionada
-        if (window.innerWidth > 480)
-        {
-            $("div.menu").siblings().hide();
-            $("div.menu").show();           
-            
-            // reseta o overflow do corpo do documento
-            if(!navigatorIsOpen)
-            {
-                document.body.style.overflow = "auto";
-            }
-        } else
-            {
-                if (!menuIsOpen)
-                {
-                    $("div.menu-icon").show();                    
-                    $("div.menu-icon").siblings().hide();
-                } else
-                    {
-                        $("div.menu-icon").hide();
-                        $("div.menu-icon").siblings().show();
-                        
-                        // altera o valor da variavel logica
-                        menuIsOpen = true;
-
-                        // anula o overflow do corpo do documento
-                        document.body.style.overflow = "hidden";
-                    }
-
-                $("div.top-icon").hide();
-            }
-    });
-});
-
-$(document).ready(function(){    
-    $(".navigator-menu-open-button").click(function(){
-        // abre o menu de navegacao
-        openNavigator(this);
-    });
-});
-
-$(document).ready(function(){    
-    $(".navigator-menu-close-button").click(function(){
-        // fecha o menu de navegacao
-        closeNavigator(this);
-    });
-});
-
-$(document).ready(function(){
-    $("ul.navigator-items p").click(function(){
-        /* fecha o menu de navegacao quando o usuario disparar o evento de click
-         * das opcoes de navegacao
-         */
-        
-        closeNavigator($(".navigator-menu-close-button"));
-    });
-});
-
-
 
 // ----> threads
