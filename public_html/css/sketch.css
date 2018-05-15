@@ -1,7 +1,7 @@
 /* Sketch: um framework responsivo simples e leve para paginas HTML  
  *
  * Marcelo Barbosa,
- * fevereiro, 2018.
+ * maio, 2018.
  */
 
 /* ------ Importacoes ------ */
@@ -42,6 +42,48 @@ body { font-size: 100%; }
 .longest-height { min-height: 500px; }
 .jumbo-height { min-height: 550px; }
 .extra-jumbo-height { min-height: 600px; }
+
+/* nivelamento de altura absoluta por escala: 100-500px */
+.absolute-shortest-height { height: 50px; }
+.absolute-shorter-height { height: 100px; }
+.absolute-short-height { height: 150px; }
+.absolute-normal-height { height: 200px; }
+.absolute-great-height { height: 250px; }
+.absolute-greater-height { height: 300px; }
+.absolute-greatest-height { height: 350px; }
+.absolute-long-height { height: 400px; }
+.absolute-longer-height { height: 450px; }
+.absolute-longest-height { height: 500px; }
+.absolute-jumbo-height { height: 550px; }
+.absolute-extra-jumbo-height { height: 600px; }
+
+/* nivelamento de largura por escala: 100-500px */
+.shortest-width { min-width: 50px; }
+.shorter-width { min-width: 100px; }
+.short-width { min-width: 150px; }
+.normal-width { min-width: 200px; }
+.great-width { min-width: 250px; }
+.greater-width { min-width: 300px; }
+.greatest-width { min-width: 350px; }
+.long-width { min-width: 400px; }
+.longer-width { min-width: 450px; }
+.longest-width { min-width: 500px; }
+.jumbo-width { min-width: 550px; }
+.extra-jumbo-width { min-width: 600px; }
+
+/* nivelamento de largura absoluta por escala: 100-500px */
+.absolute-shortest-width { width: 50px; }
+.absolute-shorter-width { width: 100px; }
+.absolute-short-width { width: 150px; }
+.absolute-normal-width { width: 200px; }
+.absolute-great-width { width: 250px; }
+.absolute-greater-width { width: 300px; }
+.absolute-greatest-width { width: 350px; }
+.absolute-long-width { width: 400px; }
+.absolute-longer-width { width: 450px; }
+.absolute-longest-width { width: 500px; }
+.absolute-jumbo-width { width: 550px; }
+.absolute-extra-jumbo-width { width: 600px; }
 
 /* grade de 12 colunas */
 .col-1 { width: 8.33%; }
@@ -817,25 +859,50 @@ form, .container, .panel, .row, .small-box, .medium-box, .large-box, .jumbo-box,
 .large-margin-frame { margin: 10px; }
 .jumbo-margin-frame { margin: 15px; }
 
+.extra-margin-frame { margin: 50px; }
+.extra-large-margin-frame { margin: 100px; }
+.extra-jumbo-margin-frame { margin: 150px; }
+.extra-extra-margin-frame { margin: 200px; }
+
 .small-margin-top { margin-top: 2px; }
 .medium-margin-top { margin-top: 5px; }
 .large-margin-top { margin-top: 10px; }
 .jumbo-margin-top { margin-top: 15px; }
+
+.extra-margin-top { margin-top: 50px; }
+.extra-large-margin-top { margin-top: 100px; }
+.extra-jumbo-margin-top { margin-top: 150px; }
+.extra-extra-margin-top { margin-top: 200px; }
 
 .small-margin-right { margin-right: 2px; }
 .medium-margin-right { margin-right: 5px; }
 .large-margin-right { margin-right: 10px; }
 .jumbo-margin-right { margin-right: 15px; }
 
+.extra-margin-right { margin-right: 50px; }
+.extra-large-margin-right { margin-right: 100px; }
+.extra-jumbo-margin-right { margin-right: 150px; }
+.extra-extra-margin-right { margin-right: 200px; }
+
 .small-margin-bottom { margin-bottom: 2px; }
 .medium-margin-bottom { margin-bottom: 5px; }
 .large-margin-bottom { margin-bottom: 10px; }
 .jumbo-margin-bottom { margin-bottom: 15px; }
 
+.extra-margin-bottom { margin-bottom: 50px; }
+.extra-large-margin-bottom { margin-bottom: 100px; }
+.extra-jumbo-margin-bottom { margin-bottom: 150px; }
+.extra-extra-margin-bottom { margin-bottom: 200px; }
+
 .small-margin-left { margin-left: 2px; }
 .medium-margin-left { margin-left: 5px; }
 .large-margin-left { margin-left: 10px; }
 .jumbo-margin-left { margin-left: 15px; }
+
+.extra-margin-left { margin-left: 50px; }
+.extra-large-margin-left { margin-left: 100px; }
+.extra-jumbo-margin-left { margin-left: 150px; }
+.extra-extra-margin-left { margin-left: 200px; }
 
 /* transicoes */
 .slower-transition:hover,.slow-transition:active { transition: all linear 3s; }
@@ -906,7 +973,7 @@ form, .container, .panel, .row, .small-box, .medium-box, .large-box, .jumbo-box,
 {
     width: 100%;
     min-height: 40px;
-	background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.5);
     position: absolute;
     bottom: 0;   
     z-index: 3;

@@ -15,6 +15,10 @@
 .fade-out { -webkit-animation: fade-out linear 1s; animation: fade-out linear 1s; }
 .fade-in-out { -webkit-animation: fade-in-out linear 1s; animation: fade-in-out linear 1s; }
 .fade-out-in { -webkit-animation: fade-out-in linear 1s; animation: fade-out-in linear 1s; }
+.bg-fade-in { -webkit-animation: bg-fade-in linear 1s; animation: bg-fade-in linear 1s; }
+.bg-fade-out { -webkit-animation: bg-fade-out linear 1s; animation: bg-fade-out linear 1s; }
+.bg-fade-in-out { -webkit-animation: bg-fade-in-out linear 1s; animation: bg-fade-in-out linear 1s; }
+.bg-fade-out-in { -webkit-animation: bg-fade-out-in linear 1s; animation: bg-fade-out-in linear 1s; }
 .horizontal-rotate { -webkit-animation: horizontal-rotate linear 1s; animation: horizontal-rotate linear 1s; }
 .move-left-to-right { -webkit-animation: move-left-to-right linear 1s; animation: move-left-to-right linear 1s; }
 .move-right-to-left { -webkit-animation: move-right-to-left linear 1s; animation: move-right-to-left linear 1s; }
@@ -117,6 +121,18 @@
     100% { opacity: 1; }
 } 
 
+@keyframes bg-fade-in
+{
+    0% { opacity: 0; background-size: 100%; }
+    100% { opacity: 1; background-size: 200%; }
+}
+
+@-webkit-keyframes bg-fade-in
+{
+    0% { opacity: 0; background-size: 100%; }
+    100% { opacity: 1; background-size: 200%; }
+}
+
 @keyframes fade-out
 {
     0% { opacity: 1; }
@@ -127,6 +143,18 @@
 {
     0% { opacity: 1; }
     100% { opacity: 0;}
+}
+
+@keyframes bg-fade-out
+{
+    0% { opacity: 1; background-size: 100%; }
+    100% { opacity: 0; background-size: 200%;}
+}
+
+@-webkit-keyframes bg-fade-out
+{
+    0% { opacity: 1; background-size: 100%; }
+    100% { opacity: 0; background-size: 200%;}
 }
 
 @keyframes fade-in-out
@@ -143,6 +171,20 @@
     100% { opacity: 0;}
 }
 
+@keyframes bg-fade-in-out
+{
+    0% { opacity: 0; background-size: 100%; }
+    50% { opacity: 1; background-size: 150%; }
+    100% { opacity: 0; background-size: 200%;}
+}
+
+@-webkit-keyframes bg-fade-in-out
+{
+    0% { opacity: 0; background-size: 100%; }
+    50% { opacity: 1; background-size: 150%; }
+    100% { opacity: 0; background-size: 200%; }
+}
+
 @keyframes fade-out-in
 {
     0% { opacity: 1; }
@@ -155,6 +197,20 @@
     0% { opacity: 1; }
     50% { opacity: 0; }
     100% { opacity: 1;}
+}
+
+@keyframes bg-fade-out-in
+{
+     0% { opacity: 1; background-size: 100%; }
+    50% { opacity: 0; background-size: 150%; }
+    100% { opacity: 1; background-size: 200%; }
+}
+
+@-webkit-keyframes bg-fade-out-in
+{
+    0% { opacity: 1; background-size: 100%; }
+    50% { opacity: 0; background-size: 150%; }
+    100% { opacity: 1; background-size: 200%; }
 }
 
 @keyframes rotate
