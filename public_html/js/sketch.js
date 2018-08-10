@@ -689,8 +689,11 @@ function hideSubMenu(obj)
     {
         if (items[i].id !== "")
         {
-            items[i].style.display = "none";
-            //items[i].removeAttribute("style");
+            if (items[i].id !== obj.id)
+            {
+                items[i].style.display = "none";
+                items[i].removeAttribute("style");
+            }
         }
     }
 }
@@ -717,7 +720,7 @@ function initSliders()
     }
 }
 
-function handleMainMenuByEvent(event)
+function handleMainMenuByEvent(event, mustBeClosed)
 {
     // controla a nevegacao dos sub-menus pelo menu drop-down por meio de toque/clique 
     // declaracao de variaveis
@@ -735,8 +738,13 @@ function handleMainMenuByEvent(event)
             {
                 if ((submenu.style.display === "none") || (submenu.style.display === ""))
                 {  
-                    hideSubMenu(submenu);                    
-                    submenu.style.display = "block";                                        
+                    submenu.style.display = "block";
+                    
+                    if(mustBeClosed)
+                    {
+                        hideSubMenu(submenu);
+                    }
+                    
                 } else
                     {
                         submenu.style.display = "none";
@@ -761,7 +769,13 @@ window.addEventListener("scroll", function () {
 });
 
 window.addEventListener(getEventByOperatingSystem(), function (event) {
-    handleMainMenuByEvent(event);
+    if(getEventByOperatingSystem() === "touchstart")
+    {
+        handleMainMenuByEvent(event, false);
+    }else
+        {
+            handleMainMenuByEvent(event, true);
+        }
 });
 
 // ----> threads
