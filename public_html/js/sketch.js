@@ -689,11 +689,8 @@ function hideSubMenu(obj)
     {
         if (items[i].id !== "")
         {
-            if (items[i].id !== obj.id)
-            {
-                items[i].style.display = "none";
-                items[i].removeAttribute("style");
-            }
+            items[i].style.display = "none";
+            items[i].removeAttribute("style");
         }
     }
 }
