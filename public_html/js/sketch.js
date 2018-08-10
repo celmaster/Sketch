@@ -24,7 +24,7 @@ function getEventByOperatingSystem()
 
     // iOS detection from: http://stackoverflow.com/a/9039885/177710
     if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        return "mousedown";
+        return "touchstart";
     }else
 	{
             return "click";
@@ -738,9 +738,9 @@ function handleMainMenuByEvent(event)
             {
                 if ((submenu.style.display === "none") || (submenu.style.display === ""))
                 {  
-                    hideSubMenu(submenu);
-                    obj.focus();
+                    hideSubMenu(submenu);                    
                     submenu.style.display = "block";                    
+                    obj.focus();
                 } else
                     {
                         submenu.style.display = "none";
