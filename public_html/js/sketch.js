@@ -690,7 +690,7 @@ function hideSubMenu(obj)
         if (items[i].id !== "")
         {
             items[i].style.display = "none";
-            items[i].removeAttribute("style");
+            //items[i].removeAttribute("style");
         }
     }
 }
@@ -736,8 +736,7 @@ function handleMainMenuByEvent(event)
                 if ((submenu.style.display === "none") || (submenu.style.display === ""))
                 {  
                     hideSubMenu(submenu);                    
-                    submenu.style.display = "block";                    
-                    obj.focus();
+                    submenu.style.display = "block";                                        
                 } else
                     {
                         submenu.style.display = "none";
