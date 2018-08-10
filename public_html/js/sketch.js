@@ -15,7 +15,7 @@ var position = 1;
 var sliderGroup = null;
 var sliders = null;
 var menuIsOpen = false;
-var typeEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
+var typeEvent = 'ontouchend' in window ? 'touchend' : 'click';
 // funcoes globais
 
 // declaracao de funcoes
