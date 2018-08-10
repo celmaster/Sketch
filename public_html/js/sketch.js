@@ -15,7 +15,20 @@ var position = 1;
 var sliderGroup = null;
 var sliders = null;
 var menuIsOpen = false;
+
 // funcoes globais
+function getEventByOperatingSystem() 
+{
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return "touchstart";
+    }else
+	{
+		return "click";
+	}
+}
 
 // declaracao de funcoes
 function cleanForm(idForm)
@@ -706,7 +719,7 @@ function initSliders()
     }
 }
 
-function handleMainMenuByEvent(event)
+function handleMainMenuByEvent(event, mustBeClosed)
 {
     // controla a nevegacao dos sub-menus pelo menu drop-down por meio de toque/clique 
     // declaracao de variaveis
@@ -725,7 +738,10 @@ function handleMainMenuByEvent(event)
                 if ((submenu.style.display === "none") || (submenu.style.display === ""))
                 {
                     submenu.style.display = "block";
-                    hideSubMenu(submenu);
+                    if(mustBeClosed)
+                    {
+                        hideSubMenu(submenu);
+                    }
                 } else
                 {
                     submenu.style.display = "none";
@@ -749,8 +765,14 @@ window.addEventListener("scroll", function () {
     topLinkHandler();
 });
 
-window.addEventListener("click", function (event) {
-    handleMainMenuByEvent(event);
+window.addEventListener(getEventByOperatingSystem(), function (event) {
+    if(getEventByOperatingSystem() === "touchstart")
+    {
+        handleMainMenuByEvent(event, false);
+    }else
+        {
+            handleMainMenuByEvent(event, true);
+        }
 });
 
 // ----> threads
