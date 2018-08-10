@@ -15,8 +15,21 @@ var position = 1;
 var sliderGroup = null;
 var sliders = null;
 var menuIsOpen = false;
-var typeEvent = 'ontouchend' in window ? 'touchend' : 'click';
+
 // funcoes globais
+function getEventByOperatingSystem() 
+{
+  // retorna um evento de toque caso seja iphone e clique caso seja qualquer outro tipo de sistema
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return "touchstart";
+    }else
+	{
+            return "click";
+	}
+}
 
 // declaracao de funcoes
 function cleanForm(idForm)
@@ -750,7 +763,7 @@ window.addEventListener("scroll", function () {
     topLinkHandler();
 });
 
-window.addEventListener(typeEvent, function (event) {
+window.addEventListener(getEventByOperatingSystem(), function (event) {
     handleMainMenuByEvent(event);
 });
 
