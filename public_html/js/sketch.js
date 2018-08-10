@@ -737,14 +737,15 @@ function handleMainMenuByEvent(event)
             if (strId.search("sub-menu-") > -1)
             {
                 if ((submenu.style.display === "none") || (submenu.style.display === ""))
-                {
-                    submenu.style.display = "block";
+                {  
                     hideSubMenu(submenu);
+                    obj.focus();
+                    submenu.style.display = "block";                    
                 } else
-                {
-                    submenu.style.display = "none";
-                    submenu.removeAttribute("style");
-                }
+                    {
+                        submenu.style.display = "none";
+                        submenu.removeAttribute("style");
+                    }
             }
         }
 
