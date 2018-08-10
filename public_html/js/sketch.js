@@ -720,12 +720,20 @@ function initSliders()
     }
 }
 
-function handleMainMenuByEvent(event, mustBeClosed)
+function handleMainMenuByEvent(event, mustBeClosed, isIOS)
 {
     // controla a nevegacao dos sub-menus pelo menu drop-down por meio de toque/clique 
     // declaracao de variaveis
     var obj = event.target;
     var submenu = obj.parentNode.getElementsByTagName("UL")[0];
+    var touches = 1;
+    var mustBeAction = true;
+    
+    if(isIOS)
+    {
+        touches = 2;
+        mustBeAction = event.touches.length === touches;
+    }
 
     if (submenu !== undefined)
     {
@@ -734,22 +742,25 @@ function handleMainMenuByEvent(event, mustBeClosed)
         {
             var strId = submenu.id;
 
-            if (strId.search("sub-menu-") > -1)
+            if(mustBeAction)
             {
-                if ((submenu.style.display === "none") || (submenu.style.display === ""))
-                {  
-                    submenu.style.display = "block";
-                    
-                    if(mustBeClosed)
-                    {
-                        hideSubMenu(submenu);
-                    }
-                    
-                } else
-                    {
-                        submenu.style.display = "none";
-                        submenu.removeAttribute("style");
-                    }
+                if (strId.search("sub-menu-") > -1)
+                {
+                    if ((submenu.style.display === "none") || (submenu.style.display === ""))
+                    {  
+                        submenu.style.display = "block";
+
+                        if(mustBeClosed)
+                        {
+                            hideSubMenu(submenu);
+                        }
+
+                    } else
+                        {
+                            submenu.style.display = "none";
+                            submenu.removeAttribute("style");
+                        }
+                }
             }
         }
 
@@ -771,10 +782,10 @@ window.addEventListener("scroll", function () {
 window.addEventListener(getEventByOperatingSystem(), function (event) {
     if(getEventByOperatingSystem() === "touchstart")
     {
-        handleMainMenuByEvent(event, false);
+        handleMainMenuByEvent(event, false, true);
     }else
         {
-            handleMainMenuByEvent(event, true);
+            handleMainMenuByEvent(event, true, false);
         }
 });
 
