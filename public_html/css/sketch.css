@@ -721,6 +721,8 @@ form, .container, .panel, .row, .small-box, .medium-box, .large-box, .jumbo-box,
     display: none;
 }
 
+.menu-items ul li { cursor: pointer; }
+
 .top-icon
 {    
     font-size: 1.2em;    

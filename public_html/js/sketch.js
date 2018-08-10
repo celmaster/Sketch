@@ -15,21 +15,7 @@ var position = 1;
 var sliderGroup = null;
 var sliders = null;
 var menuIsOpen = false;
-
 // funcoes globais
-function getEventByOperatingSystem() 
-{
-  // retorna um evento de toque caso seja iphone e clique caso seja qualquer outro tipo de sistema
-  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-    // iOS detection from: http://stackoverflow.com/a/9039885/177710
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        return "touchstart";
-    }else
-	{
-            return "click";
-	}
-}
 
 // declaracao de funcoes
 function cleanForm(idForm)
@@ -720,20 +706,12 @@ function initSliders()
     }
 }
 
-function handleMainMenuByEvent(event, mustBeClosed, isIOS)
+function handleMainMenuByEvent(event)
 {
     // controla a nevegacao dos sub-menus pelo menu drop-down por meio de toque/clique 
     // declaracao de variaveis
     var obj = event.target;
     var submenu = obj.parentNode.getElementsByTagName("UL")[0];
-    var touches = 1;
-    var mustBeAction = true;
-    
-    if(isIOS)
-    {
-        touches = 2;
-        mustBeAction = event.touches.length === touches;
-    }
 
     if (submenu !== undefined)
     {
@@ -742,24 +720,16 @@ function handleMainMenuByEvent(event, mustBeClosed, isIOS)
         {
             var strId = submenu.id;
 
-            if(mustBeAction)
+            if (strId.search("sub-menu-") > -1)
             {
-                if (strId.search("sub-menu-") > -1)
+                if ((submenu.style.display === "none") || (submenu.style.display === ""))
                 {
-                    if ((submenu.style.display === "none") || (submenu.style.display === ""))
-                    {  
-                        submenu.style.display = "block";
-
-                        if(mustBeClosed)
-                        {
-                            hideSubMenu(submenu);
-                        }
-
-                    } else
-                        {
-                            submenu.style.display = "none";
-                            submenu.removeAttribute("style");
-                        }
+                    submenu.style.display = "block";
+                    hideSubMenu(submenu);
+                } else
+                {
+                    submenu.style.display = "none";
+                    submenu.removeAttribute("style");
                 }
             }
         }
@@ -779,14 +749,8 @@ window.addEventListener("scroll", function () {
     topLinkHandler();
 });
 
-window.addEventListener(getEventByOperatingSystem(), function (event) {
-    if(getEventByOperatingSystem() === "touchstart")
-    {
-        handleMainMenuByEvent(event, false, true);
-    }else
-        {
-            handleMainMenuByEvent(event, true, false);
-        }
+window.addEventListener("click", function (event) {
+    handleMainMenuByEvent(event);
 });
 
 // ----> threads
