@@ -15,7 +15,7 @@ var position = 1;
 var sliderGroup = null;
 var sliders = null;
 var menuIsOpen = false;
-
+var typeEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 // funcoes globais
 
 // declaracao de funcoes
@@ -750,7 +750,7 @@ window.addEventListener("scroll", function () {
     topLinkHandler();
 });
 
-window.addEventListener("click", function (event) {
+window.addEventListener(typeEvent, function (event) {
     handleMainMenuByEvent(event);
 });
 
