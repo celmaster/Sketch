@@ -15,6 +15,7 @@ var position = 1;
 var sliderGroup = null;
 var sliders = null;
 var menuIsOpen = false;
+var eventType = "click";
 
 // funcoes globais
 function getEventByOperatingSystem() 
@@ -697,6 +698,12 @@ function hideSubMenu(obj)
     }
 }
 
+function initGlobalConfigs()
+{
+    // inicializa as configuracoes globais
+    eventType = getEventByOperatingSystem();
+}
+
 function initSliders()
 {
     // inicializa todos os sliders
@@ -758,6 +765,7 @@ window.addEventListener("resize", function () {
     estabilishMenu();
 });
 window.addEventListener("load", function () {
+    initGlobalConfigs();
     initSliders();
 });
 
@@ -765,8 +773,8 @@ window.addEventListener("scroll", function () {
     topLinkHandler();
 });
 
-window.addEventListener(getEventByOperatingSystem(), function (event) {
-    if(getEventByOperatingSystem() === "touchstart")
+window.addEventListener(eventType, function (event) {
+    if(eventType === "touchstart")
     {
         handleMainMenuByEvent(event, false);
     }else
