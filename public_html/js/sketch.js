@@ -203,15 +203,15 @@ function numberFieldHandler(event, object)
 {
     // controla um campo numerico
     // declaracao de variaveis
-    var characterTyped = event.which || event.keyCode;
-    var isNumber = (characterTyped >= 48) && (characterTyped <= 57) && !event.ctrlKey;
-    var isDot = (event.which === 44) || (event.which === 46) || (event.keyCode === 194) || (event.keyCode === 190) || (event.keyCode === 188) || (event.keyCode === 110);
-    var isDirectional = (characterTyped >= 37) && (characterTyped <= 40);
-    var isDelete = (event.which === 0) && (event.keyCode === 46);
-    var isBackspace = characterTyped === 8;
-    var isEnd = characterTyped === 35;
-    var isHome = characterTyped === 36;
-    var isCommand = event.ctrlKey;
+    var characterTyped = event.key;
+    var isNumber = (!isNaN(characterTyped)) && (characterTyped !== "Control");
+    var isDot = (characterTyped === ".") || (characterTyped === ",");
+    var isDirectional = (characterTyped === "ArrowLeft") || (characterTyped === "ArrowUp") || (characterTyped === "ArrowRight") || (characterTyped === "ArrowDown");
+    var isDelete = (characterTyped === "Delete");
+    var isBackspace = event.code === "Space";
+    var isEnd = characterTyped === "End";
+    var isHome = characterTyped === "Home";
+    var isCommand = characterTyped === "Control";
     var str = object.value;
     var hasComma = str.indexOf(",") > -1;
     var hasDot = str.indexOf(".") > -1;
