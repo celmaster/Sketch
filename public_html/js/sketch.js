@@ -207,7 +207,7 @@ function numberFieldHandler(event, object)
     var isNumber = (!isNaN(characterTyped)) && (characterTyped !== "Control");
     var isDot = (characterTyped === ".") || (characterTyped === ",");
     var isDirectional = (characterTyped === "ArrowLeft") || (characterTyped === "ArrowUp") || (characterTyped === "ArrowRight") || (characterTyped === "ArrowDown");
-    var isDelete = (characterTyped === "Delete");
+    var isDelete = (characterTyped === "Delete") || (characterTyped === "Backspace");    
     var isBackspace = event.code === "Space";
     var isEnd = characterTyped === "End";
     var isHome = characterTyped === "Home";
