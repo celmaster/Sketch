@@ -204,14 +204,16 @@ function numberFieldHandler(event, object)
     // controla um campo numerico
     // declaracao de variaveis
     var characterTyped = event.key;
+    var keyCharacterTyped = event.code;
     var isNumber = (!isNaN(characterTyped)) && (characterTyped !== "Control");
     var isDot = (characterTyped === ".") || (characterTyped === ",");
     var isDirectional = (characterTyped === "ArrowLeft") || (characterTyped === "ArrowUp") || (characterTyped === "ArrowRight") || (characterTyped === "ArrowDown");
-    var isDelete = (characterTyped === "Delete") || (characterTyped === "Backspace");    
+    var isDelete = (characterTyped === "Delete") || (keyCharacterTyped === "Delete") || (characterTyped === "Backspace") || (keyCharacterTyped === "Backspace");    
     var isBackspace = event.code === "Space";
     var isEnd = characterTyped === "End";
     var isHome = characterTyped === "Home";
     var isCommand = characterTyped === "Control";
+    var isTab = (characterTyped === "Tab") || (keyCharacterTyped === "Tab")
     var str = object.value;
     var hasComma = str.indexOf(",") > -1;
     var hasDot = str.indexOf(".") > -1;
@@ -219,7 +221,7 @@ function numberFieldHandler(event, object)
 
     // constroi a primeira premissa
     var firstStatement = isNumber || isDirectional || isDelete
-            || isBackspace || isEnd || isHome || isCommand;
+            || isBackspace || isEnd || isHome || isCommand || isTab;
 
     // constroi a segunda premissa
     var secondStatement = !hasSignal && isDot;
