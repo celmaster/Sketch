@@ -472,14 +472,14 @@ form, .container, .panel, .row, .small-box, .medium-box, .large-box, .jumbo-box,
 
 /* codigo */
 .code { position: relative; display: block; margin: 0; padding: 0; font-family: Inconsolata; }
-.code .dark-theme { background-color: #2A2A2A; border-left: 7px solid gray; }
-.code .light-theme { background-color: #FEFFFF; border-left: 7px solid gray; }
+.code .dark-theme { background-color: #3A3A3A; border-left: 5px solid slategray; }
+.code .light-theme { background-color: ghostwhite; border-left: 5px solid slategray; }
 .code .light-theme, .code .dark-theme { padding: 16px; }
 .code p { padding: 0; }
 
 .code .dark-theme p, .code .dark-theme span, .code .dark-theme span.text { color: white; font-family: Inconsolata; }
-.code .dark-theme span.comment { color: paleturquoise; }
-.code .dark-theme span.keyword, .code .dark-theme span.boolean, .code .dark-theme span.tag  { color: red; }
+.code .dark-theme span.comment { color: papayawhip; }
+.code .dark-theme span.keyword, .code .dark-theme span.boolean, .code .dark-theme span.tag  { color: paleturquoise; }
 .code .dark-theme span.char, .code .dark-theme span.string, .code .dark-theme span.attribute { color: yellow; }
 .code .dark-theme span.attribute-value { color: orange; }
 .code .dark-theme span.number { color: lime; }
