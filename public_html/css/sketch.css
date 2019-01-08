@@ -29,7 +29,7 @@ body { font-size: 100%; }
 .height-lv11 { height: 91.66%; }
 .height-lv12 { height: 100%; }
 
-/* nivelamento de altura por escala: 100-500px */
+/* nivelamento de altura por escala: 100-900px */
 .shortest-height { min-height: 50px; }
 .shorter-height { min-height: 100px; }
 .short-height { min-height: 150px; }
@@ -42,8 +42,14 @@ body { font-size: 100%; }
 .longest-height { min-height: 500px; }
 .jumbo-height { min-height: 550px; }
 .extra-jumbo-height { min-height: 600px; }
+.wide-height { min-height: 650px; }
+.wider-height { min-height: 700px; }
+.widest-height { min-height: 750px; }
+.broad-height { min-height: 800px; }
+.broader-height { min-height: 850px; }
+.broadest-height { min-height: 900px; }
 
-/* nivelamento de altura absoluta por escala: 100-500px */
+/* nivelamento de altura absoluta por escala: 100-900px */
 .absolute-shortest-height { height: 50px; }
 .absolute-shorter-height { height: 100px; }
 .absolute-short-height { height: 150px; }
@@ -56,8 +62,14 @@ body { font-size: 100%; }
 .absolute-longest-height { height: 500px; }
 .absolute-jumbo-height { height: 550px; }
 .absolute-extra-jumbo-height { height: 600px; }
+.absolute-wide-height { height: 650px; }
+.absolute-wider-height { height: 700px; }
+.absolute-widest-height { height: 750px; }
+.absolute-broad-height { height: 800px; }
+.absolute-broader-height { height: 850px; }
+.absolute-broadest-height { height: 900px; }
 
-/* nivelamento de largura por escala: 100-500px */
+/* nivelamento de largura por escala: 100-900px */
 .shortest-width { min-width: 50px; }
 .shorter-width { min-width: 100px; }
 .short-width { min-width: 150px; }
@@ -70,8 +82,14 @@ body { font-size: 100%; }
 .longest-width { min-width: 500px; }
 .jumbo-width { min-width: 550px; }
 .extra-jumbo-width { min-width: 600px; }
+.wide-width { min-width: 650px; }
+.wider-width { min-width: 700px; }
+.widest-width { min-width: 750px; }
+.broad-width { min-width: 800px; }
+.broader-width { min-width: 850px; }
+.broadest-width { min-width: 900px; }
 
-/* nivelamento de largura absoluta por escala: 100-500px */
+/* nivelamento de largura absoluta por escala: 100-900px */
 .absolute-shortest-width { width: 50px; }
 .absolute-shorter-width { width: 100px; }
 .absolute-short-width { width: 150px; }
@@ -84,6 +102,12 @@ body { font-size: 100%; }
 .absolute-longest-width { width: 500px; }
 .absolute-jumbo-width { width: 550px; }
 .absolute-extra-jumbo-width { width: 600px; }
+.absolute-wide-width { width: 650px; }
+.absolute-wider-width { width: 700px; }
+.absolute-widest-width { width: 750px; }
+.absolute-broad-width { width: 800px; }
+.absolute-broader-width { width: 850px; }
+.absolute-broadest-width { width: 900px; }
 
 /* grade de 12 colunas */
 .col-1 { width: 8.33%; }
