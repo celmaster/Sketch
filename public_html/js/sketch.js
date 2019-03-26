@@ -18,17 +18,17 @@ var menuIsOpen = false;
 var eventType = "click";
 
 // funcoes globais
-function getEventByOperatingSystem() 
+function getEventByOperatingSystem()
 {
     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
     // iOS detection from: http://stackoverflow.com/a/9039885/177710
     if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
         return "touchstart";
-    }else
-	{
-		return "click";
-	}
+    } else
+    {
+        return "click";
+    }
 }
 
 // declaracao de funcoes
@@ -67,7 +67,7 @@ function cleanForm(idForm)
 function cleanField(id)
 {
     // limpa um campo
-    if(exist(id))
+    if (exist(id))
     {
         document.getElementById(id).value = "";
     }
@@ -139,7 +139,23 @@ function submitForm(id)
     }
 }
 
-function createMask(id, mask)
+function keyIsBackspace(event)
+{
+    var characterTyped = event.key;
+    var keyCharacterTyped = event.code;
+
+    var isBackspace = (characterTyped === "Backspace") || (keyCharacterTyped === "Backspace");
+
+    if (isBackspace)
+    {
+        return true;
+    } else
+    {
+        return false;
+    }
+}
+
+function createMask(id, mask, event)
 {
     // cria uma mascara para um dado campo
     if (exist(id))
@@ -150,20 +166,35 @@ function createMask(id, mask)
         var formattedText = "";
         var position = text.length - 1;
 
+        // seta o maxlength do campo
+        if (targetObject.maxLength === -1)
+        {
+            targetObject.maxLength = mask.length;
+        }
+
         // pega o texto corrente
         formattedText = text.substring(0, position);
 
         // concatena o valor com a mascara
         if (maskText.charAt(position) === "x")
         {
-            formattedText = new String(formattedText.concat(text.charAt(position)));
-
+            formattedText = formattedText.concat(text.charAt(position));
         } else
         {
-            formattedText = formattedText.concat(maskText.charAt(position));
-            formattedText = formattedText.concat(text.charAt(position));
-        }
+            if (!keyIsBackspace(event))
+            {
+                if (text.charAt(position) !== maskText.charAt(position))
+                {
+                    formattedText = formattedText.concat(maskText.charAt(position));
+                }
 
+                formattedText = formattedText.concat(text.charAt(position));
+            } else
+            {
+                formattedText = formattedText.concat(text.charAt(position - 1));
+            }
+
+        }
 
         // colocando o valor obtido no campo referenciado
         targetObject.value = formattedText;
@@ -208,8 +239,8 @@ function numberFieldHandler(event, object)
     var isNumber = (!isNaN(characterTyped)) && (characterTyped !== "Control");
     var isDot = (characterTyped === ".") || (characterTyped === ",");
     var isDirectional = (characterTyped === "ArrowLeft") || (characterTyped === "ArrowUp") || (characterTyped === "ArrowRight") || (characterTyped === "ArrowDown");
-    var isDelete = (characterTyped === "Delete") || (keyCharacterTyped === "Delete") || (characterTyped === "Backspace") || (keyCharacterTyped === "Backspace");    
-    var isBackspace = event.code === "Space";
+    var isDelete = (characterTyped === "Delete") || (keyCharacterTyped === "Delete") || (characterTyped === "Backspace") || (keyCharacterTyped === "Backspace");
+    var isBackspace = event.code === "Backspace";
     var isEnd = characterTyped === "End";
     var isHome = characterTyped === "Home";
     var isCommand = characterTyped === "Control";
@@ -426,7 +457,7 @@ function openMenu()
 
 function estabilishMenu()
 {
-    // estabiliza o menu dropdown
+    // estabiliza o menu dropdown mediante a largura da tela
     if (window.innerWidth > 480)
     {
         display("menu-icon", false);
@@ -557,6 +588,71 @@ function next(viewerId, imageListId, presentationId)
     view(object, viewerId, imageListId, presentationId);
 }
 
+function moveImageByTouch(viewerId, imageListId, presentationId, event)
+{
+    // move a imagem pelo toque na tela
+    // declaracao de variaveis
+    var touchs = event.changedTouches[0];
+    var halfOfScreen = window.innerWidth / 2;
+    var target = event.target.parentNode;    
+    var targetChild = event.target;    
+    var buttonsClickeds = (target.getAttribute("id") === "prior-button")
+                       || (target.getAttribute("id") === "next-button")
+                       || (target.getAttribute("id") === "presentation-close-button")
+                       || (targetChild.getAttribute("id") === "prior-button")
+                       || (targetChild.getAttribute("id") === "next-button")
+                       || (targetChild.getAttribute("id") === "presentation-close-button");
+    
+    if(!buttonsClickeds)
+    {
+        if(touchs.pageX < halfOfScreen)
+        {
+            prior(viewerId, imageListId, presentationId);
+        }else
+            {
+                next(viewerId, imageListId, presentationId);
+            }
+    }
+    
+}
+
+function moveImage(viewerId, imageListId, presentationId, event)
+{
+    // move a imagem de acordo com a entrada do usuario
+    // declaracao de variaveis
+    var typePressed = event.which || event.keyCode;	// utiliza o atributo which caso seja um navegador Mozilla Firefox
+    
+    // seta para esquerda
+    if(typePressed == 37)
+    {
+        // imagem anterior
+        prior(viewerId, imageListId, presentationId);
+    }
+
+    // seta para cima
+    if(typePressed == 38)
+    {
+        // ultima imagem
+        var object = document.getElementById("image-item-" + imageViewLength);
+        view(object, viewerId, imageListId, presentationId);
+    }
+
+    // seta para direita
+    if(typePressed == 39)
+    {
+        // imagem posterior
+        next(viewerId, imageListId, presentationId);
+    }
+
+    // seta para baixo
+    if(typePressed == 40)
+    {
+        // primeira imagem
+        var object = document.getElementById("image-item-1");
+        view(object, viewerId, imageListId, presentationId);
+    }
+}
+
 function viewById(imageId, viewerId, imageListId, presentationId)
 {
     // visualiza uma imagem por seu id
@@ -570,61 +666,64 @@ function viewById(imageId, viewerId, imageListId, presentationId)
 function view(object, viewerId, imageListId, presentationId)
 {
     // visualiza imagens de uma lista
-    // verifica se a variavel de quantidade de imagens foi inicializada
-    if (imageViewLength === null)
+    if(object !== null)
     {
-        initImageViewLength(imageListId);
-    }
-
-    // verifica se o id do visualizador existe
-    if (exist(viewerId) && exist(presentationId))
-    {
-        // anula o overflow do corpo do documento
-        document.body.style.overflow = "hidden";
-
-        // armazena a descricao da imagem
-        var caption = "";
-
-        // obtem o indice da imagem para navegar para outras imagens
-        var imageIndex = parseInt(object.id.substring(object.id.lastIndexOf("-") + 1));
-        setImageViewPrior(imageIndex - 1);
-        setImageViewNext(imageIndex + 1);
-
-        //verifica se a descricao da imagem foi dada pelo desenvolvedor/designer
-        if (exist("image-caption-" + imageIndex))
+        // verifica se a variavel de quantidade de imagens foi inicializada
+        if (imageViewLength === null)
         {
-            caption = document.getElementById("image-caption-" + imageIndex).innerHTML;
-        } else
-        {
-            caption = "Foto " + imageIndex;
+            initImageViewLength(imageListId);
         }
 
-        // exibe a legenda da imagem caso o elemento image-caption exista
-        if (exist("image-caption"))
+        // verifica se o id do visualizador existe
+        if (exist(viewerId) && exist(presentationId))
         {
-            document.getElementById("image-caption").innerText = caption;
+            // anula o overflow do corpo do documento
+            document.body.style.overflow = "hidden";
+
+            // armazena a descricao da imagem
+            var caption = "";
+
+            // obtem o indice da imagem para navegar para outras imagens
+            var imageIndex = parseInt(object.id.substring(object.id.lastIndexOf("-") + 1));
+            setImageViewPrior(imageIndex - 1);
+            setImageViewNext(imageIndex + 1);
+
+            //verifica se a descricao da imagem foi dada pelo desenvolvedor/designer
+            if (exist("image-caption-" + imageIndex))
+            {
+                caption = document.getElementById("image-caption-" + imageIndex).innerHTML;
+            } else
+            {
+                caption = "Foto " + imageIndex;
+            }
+
+            // exibe a legenda da imagem caso o elemento image-caption exista
+            if (exist("image-caption"))
+            {
+                document.getElementById("image-caption").innerText = caption;
+            }
+
+            // obtem a instancia do objeto img que ira atuar como visualizador
+            var viewer = document.getElementById(viewerId);
+
+            // obtem o url da imagem a ser visualizada
+            var imageURL = object.style.backgroundImage;
+
+            // fixa a imagem no objeto visualizador
+            viewer.src = noQuote(imageURL.substring(4, (imageURL.length - 1)));
+
+            // exibe o apresentador
+            display(presentationId, true);
+
+            // exibe os navegadores
+            showPresentationNavButtons();
+
+            // faz o top-icon ficar oculto
+            display("top-icon", false);
+
+            // altera o valor da variavel logica indicando que o visualizador de imagens esta aberto
+            imageViewIsOpen = true;
         }
-
-        // obtem a instancia do objeto img que ira atuar como visualizador
-        var viewer = document.getElementById(viewerId);
-
-        // obtem o url da imagem a ser visualizada
-        var imageURL = object.style.backgroundImage;
-
-        // fixa a imagem no objeto visualizador
-        viewer.src = noQuote(imageURL.substring(4, (imageURL.length - 1)));
-
-        // exibe o apresentador
-        display(presentationId, true);
-
-        // exibe os navegadores
-        showPresentationNavButtons();
-
-        // faz o top-icon ficar oculto
-        display("top-icon", false);
-
-        // altera o valor da variavel logica indicando que o visualizador de imagens esta aberto
-        imageViewIsOpen = true;
     }
 }
 
@@ -722,6 +821,21 @@ function initSliders()
     }
 }
 
+function initImageViewer()
+{
+    // inicializa os eventos do visualizador de imagens
+    if (exist("presentation-configuration"))
+    {
+        // obtem os sliders presentes na tela
+        var configuration = JSON.parse(document.getElementById("presentation-configuration").innerHTML);
+        
+        document.body.addEventListener("keyup", function(){
+            moveImage(configuration.viewerId, configuration.listPrefixId, configuration.presentationId, event);
+        });
+
+    }
+}
+
 function handleMainMenuByEvent(event, mustBeClosed)
 {
     // controla a nevegacao dos sub-menus pelo menu drop-down por meio de toque/clique 
@@ -741,7 +855,7 @@ function handleMainMenuByEvent(event, mustBeClosed)
                 if ((submenu.style.display === "none") || (submenu.style.display === ""))
                 {
                     submenu.style.display = "block";
-                    if(mustBeClosed)
+                    if (mustBeClosed)
                     {
                         hideSubMenu(submenu);
                     }
@@ -762,6 +876,7 @@ window.addEventListener("resize", function () {
 });
 window.addEventListener("load", function () {
     initSliders();
+    initImageViewer();    
 });
 
 window.addEventListener("scroll", function () {
@@ -769,13 +884,13 @@ window.addEventListener("scroll", function () {
 });
 
 window.addEventListener(getEventByOperatingSystem(), function (event) {
-    if(getEventByOperatingSystem() === "touchstart")
+    if (getEventByOperatingSystem() === "touchstart")
     {
         handleMainMenuByEvent(event, false);
-    }else
-        {
-            handleMainMenuByEvent(event, true);
-        }
+    } else
+    {
+        handleMainMenuByEvent(event, true);
+    }
 });
 
 // ----> threads
