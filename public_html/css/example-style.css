@@ -35,6 +35,10 @@ body { background-color: #2A2A2A;  }
 
 .drop-down-menu .close-icon { color: #4B0082; }
 
+/* bloco de conteudo com abas */
+.tab ul.indexes li.tab-displayed { background-color: indigo; color:white; }
+.tab ul.indexes { padding: 0; border-bottom: 5px solid indigo; }
+
 /* media query para resolucao de telas: sobreescreve classes */
 @media only screen and (max-width: 480px) /* smartphones */
 {

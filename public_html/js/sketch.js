@@ -398,6 +398,33 @@ function hide(id)
     display(id, false);
 }
 
+function showTabIndex(tabId, itemId)
+{
+    // visualiza uma area de conteudo do tab-index
+    // declaracao de variaveis
+    var tab = getObject(tabId);
+    
+    if(tab !== null)
+    {   
+        var tabIndex = tab.getElementsByClassName("indexes")[0];
+        var indexes = tabIndex.getElementsByTagName("LI");
+        var contentIndex = tab.getElementsByClassName("content-index")[0].getElementsByTagName("div");
+        
+        for(i = 0; i < indexes.length; i++)
+        {
+            if(indexes[i].getAttribute("id") === itemId)
+            {
+                contentIndex[i].style.display = "block";
+                indexes[i].classList.add("tab-displayed");
+            }else
+                {
+                     contentIndex[i].style.display = "none";
+                    indexes[i].classList.remove("tab-displayed");
+                }
+        }
+    }
+}
+
 function openNavigator(id)
 {
     // abre o navegador de recursos
