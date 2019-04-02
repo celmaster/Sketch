@@ -1013,6 +1013,10 @@ form, .container, .panel, .row, .small-box, .medium-box, .large-box, .jumbo-box,
 .tab .indexes-container { overflow-x: auto; white-space: nowrap;   }
 .tab ul.indexes { padding: 0; border-bottom: 5px solid dodgerblue; }
 .tab ul.indexes li{ position: relative; display: inline-block; list-style: none; margin: 0; } 
+.tab ul.indexes li { border-right: 2px solid white; background-color: aliceblue;  }
+.tab ul.indexes li:last-child { border-right: 0; }
+.tab ul.indexes li:hover { background-color: dodgerblue; }
+.tab ul.indexes li a:hover { color:white; }
 .tab ul.indexes li a { color: black; }
 .tab .content-index div { display: none; }
 .tab .content-index div:first-child { display: block; }

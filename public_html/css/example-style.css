@@ -38,6 +38,8 @@ body { background-color: #2A2A2A;  }
 /* bloco de conteudo com abas */
 .tab ul.indexes li.tab-displayed { background-color: indigo; color:white; }
 .tab ul.indexes { padding: 0; border-bottom: 5px solid indigo; }
+.tab ul.indexes li { border-right: 2px solid white; background-color: lavender;  }
+.tab ul.indexes li:hover { background-color: indigo; }
 
 /* media query para resolucao de telas: sobreescreve classes */
 @media only screen and (max-width: 480px) /* smartphones */
