@@ -1018,8 +1018,8 @@ form, .container, .panel, .row, .small-box, .medium-box, .large-box, .jumbo-box,
 .tab ul.indexes li:hover { background-color: dodgerblue; }
 .tab ul.indexes li a:hover { color:white; }
 .tab ul.indexes li a { color: black; }
-.tab .content-index div { display: none; }
-.tab .content-index div:first-child { display: block; }
+.tab .tab-content div.content { display: none; }
+.tab .tab-content div.content:first-child { display: block; }
 
 /*------------- media queries ------------ */
 @media only screen and (max-width: 1200px) /* dispositivos full hd */

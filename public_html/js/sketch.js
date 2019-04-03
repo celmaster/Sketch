@@ -408,17 +408,18 @@ function showTabIndex(tabId, itemId)
     {   
         var tabIndex = tab.getElementsByClassName("indexes")[0];
         var indexes = tabIndex.getElementsByTagName("LI");
-        var contentIndex = tab.getElementsByClassName("content-index")[0].getElementsByTagName("div");
+        var tabContent = tab.getElementsByClassName("tab-content")[0];
+        var content = tabContent.getElementsByClassName("content");
         
         for(i = 0; i < indexes.length; i++)
         {
             if(indexes[i].getAttribute("id") === itemId)
             {
-                contentIndex[i].style.display = "block";
+                content[i].style.display = "block";
                 indexes[i].classList.add("tab-displayed");
             }else
                 {
-                     contentIndex[i].style.display = "none";
+                     content[i].style.display = "none";
                     indexes[i].classList.remove("tab-displayed");
                 }
         }
