@@ -133,8 +133,10 @@ form, .container, .panel, .row, .small-box, .medium-box, .large-box, .jumbo-box,
 .relative-small-box, .relative-medium-box, .relative-large-box, .relative-jumbo-box, .relative-extra-jumbo-box
 { position: relative; padding: 0; border: 0; margin: 0; }
 
+/* linhas e colunas */
 .row { display: block; }
 .row [class*="col-"] { float: left; }
+.row .no-float { float:none; }
 
 .container::after, .panel::after, .row::after { content: ""; display: block; clear: both; } 
 
