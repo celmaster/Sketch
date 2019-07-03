@@ -19,40 +19,6 @@ var menuIsOpen = false;
 var eventType = "click";
 
 // funcoes globais
-function addToggleElement(id)
-{
-    // adiciona um elemento ao array de elementos
-    toggleElements[id] = true;
-}
-
-function toggle(id)
-{
-    // ativa o efeito de show/hide para elementos
-    if(exist(id))
-    {
-        
-        if(toggleElements === null)
-        {
-            toggleElements = [];
-        }
-        
-        if(toggleElements[id] === undefined)
-        {
-            addToggleElement(id);
-        }
-
-        toggleElements[id] = !toggleElements[id];
-        
-        if(toggleElements[id] === true)
-        {
-            show(id);
-        }else
-            {
-                hide(id);
-            }
-    }
-}
-
 function getEventByOperatingSystem()
 {
     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -930,6 +896,41 @@ function handleMainMenuByEvent(event, mustBeClosed)
             }
         }
 
+    }
+}
+
+function addToggleElement(id)
+{
+    // adiciona um elemento ao array de elementos
+    toggleElements[id] = true;
+}
+
+function toggle(id, status)
+{
+    // ativa o efeito de show/hide para elementos
+    if(exist(id))
+    {
+        
+        if(toggleElements === null)
+        {
+            toggleElements = [];
+        }
+        
+        if(toggleElements[id] === undefined)
+        {
+            addToggleElement(id);
+            toggleElements[id] = status;
+        }
+        
+        if(toggleElements[id] === true)
+        {
+            show(id);
+            toggleElements[id] = false;
+        }else
+            {
+                hide(id);
+                toggleElements[id] = true;
+            }
     }
 }
 
