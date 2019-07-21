@@ -648,37 +648,42 @@ function moveImageByTouch(viewerId, imageListId, presentationId, event)
 function moveImage(viewerId, imageListId, presentationId, event)
 {
     // move a imagem de acordo com a entrada do usuario
-    // declaracao de variaveis
-    var typePressed = event.which || event.keyCode;	// utiliza o atributo which caso seja um navegador Mozilla Firefox
+    var typePressed = null;
     
-    // seta para esquerda
-    if(typePressed == 37)
+    if(menuIsOpen)
     {
-        // imagem anterior
-        prior(viewerId, imageListId, presentationId);
-    }
+        // declaracao de variaveis
+        typePressed = event.which || event.keyCode;	// utiliza o atributo which caso seja um navegador Mozilla Firefox
 
-    // seta para cima
-    if(typePressed == 38)
-    {
-        // ultima imagem
-        var object = document.getElementById("image-item-" + imageViewLength);
-        view(object, viewerId, imageListId, presentationId);
-    }
+        // seta para esquerda
+        if(typePressed == 37)
+        {
+            // imagem anterior
+            prior(viewerId, imageListId, presentationId);
+        }
 
-    // seta para direita
-    if(typePressed == 39)
-    {
-        // imagem posterior
-        next(viewerId, imageListId, presentationId);
-    }
+        // seta para cima
+        if(typePressed == 38)
+        {
+            // ultima imagem
+            var object = document.getElementById("image-item-" + imageViewLength);
+            view(object, viewerId, imageListId, presentationId);
+        }
 
-    // seta para baixo
-    if(typePressed == 40)
-    {
-        // primeira imagem
-        var object = document.getElementById("image-item-1");
-        view(object, viewerId, imageListId, presentationId);
+        // seta para direita
+        if(typePressed == 39)
+        {
+            // imagem posterior
+            next(viewerId, imageListId, presentationId);
+        }
+
+        // seta para baixo
+        if(typePressed == 40)
+        {
+            // primeira imagem
+            var object = document.getElementById("image-item-1");
+            view(object, viewerId, imageListId, presentationId);
+        }
     }
 }
 
