@@ -650,7 +650,7 @@ function moveImage(viewerId, imageListId, presentationId, event)
     // move a imagem de acordo com a entrada do usuario
     var typePressed = null;
     
-    if(menuIsOpen)
+    if(imageViewIsOpen)
     {
         // declaracao de variaveis
         typePressed = event.which || event.keyCode;	// utiliza o atributo which caso seja um navegador Mozilla Firefox
