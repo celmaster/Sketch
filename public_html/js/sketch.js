@@ -19,6 +19,95 @@ var menuIsOpen = false;
 var eventType = "click";
 
 // funcoes globais
+function validarCNPJ(cnpj)
+{
+    // valida o cnpj de uma instituicao
+    cnpj = cnpj.replace(/[^\d]+/g, '');
+
+    if (cnpj == '')
+        return false;
+
+    if (cnpj.length != 14)
+        return false;
+
+    // Elimina CNPJs invalidos conhecidos
+    if (cnpj == "00000000000000" ||
+            cnpj == "11111111111111" ||
+            cnpj == "22222222222222" ||
+            cnpj == "33333333333333" ||
+            cnpj == "44444444444444" ||
+            cnpj == "55555555555555" ||
+            cnpj == "66666666666666" ||
+            cnpj == "77777777777777" ||
+            cnpj == "88888888888888" ||
+            cnpj == "99999999999999")
+        return false;
+
+    // Valida DVs
+    tamanho = cnpj.length - 2
+    numeros = cnpj.substring(0, tamanho);
+    digitos = cnpj.substring(tamanho);
+    soma = 0;
+    pos = tamanho - 7;
+    for (i = tamanho; i >= 1; i--) {
+        soma += numeros.charAt(tamanho - i) * pos--;
+        if (pos < 2)
+            pos = 9;
+    }
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(0))
+        return false;
+
+    tamanho = tamanho + 1;
+    numeros = cnpj.substring(0, tamanho);
+    soma = 0;
+    pos = tamanho - 7;
+    for (i = tamanho; i >= 1; i--) {
+        soma += numeros.charAt(tamanho - i) * pos--;
+        if (pos < 2)
+            pos = 9;
+    }
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(1))
+        return false;
+    return true;
+}
+
+function validarCPF(cpf)
+{
+    // valida cpf
+    // declaracao de variaveis
+    var Soma;
+    var Resto;
+    Soma = 0;
+
+    // elimina os caracteres nao numericos
+    cpf = cpf.replace(/[^\d]+/g, '');
+
+    if (cpf == "00000000000")
+        return false;
+
+    for (i = 1; i <= 9; i++)
+        Soma = Soma + parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))
+        Resto = 0;
+    if (Resto != parseInt(cpf.substring(9, 10)))
+        return false;
+
+    Soma = 0;
+    for (i = 1; i <= 10; i++)
+        Soma = Soma + parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))
+        Resto = 0;
+    if (Resto != parseInt(cpf.substring(10, 11)))
+        return false;
+    return true;
+}
+
 function getEventByOperatingSystem()
 {
     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -404,25 +493,25 @@ function showTabIndex(tabId, itemId)
     // visualiza uma area de conteudo do tab-index
     // declaracao de variaveis
     var tab = getObject(tabId);
-    
-    if(tab !== null)
-    {   
+
+    if (tab !== null)
+    {
         var tabIndex = tab.getElementsByClassName("indexes")[0];
         var indexes = tabIndex.getElementsByTagName("LI");
         var tabContent = tab.getElementsByClassName("tab-content")[0];
         var content = tabContent.getElementsByClassName("content");
-        
-        for(i = 0; i < indexes.length; i++)
+
+        for (i = 0; i < indexes.length; i++)
         {
-            if(indexes[i].getAttribute("id") === itemId)
+            if (indexes[i].getAttribute("id") === itemId)
             {
                 content[i].style.display = "block";
                 indexes[i].classList.add("tab-displayed");
-            }else
-                {
-                     content[i].style.display = "none";
-                    indexes[i].classList.remove("tab-displayed");
-                }
+            } else
+            {
+                content[i].style.display = "none";
+                indexes[i].classList.remove("tab-displayed");
+            }
         }
     }
 }
@@ -623,47 +712,47 @@ function moveImageByTouch(viewerId, imageListId, presentationId, event)
     // declaracao de variaveis
     var touchs = event.changedTouches[0];
     var halfOfScreen = window.innerWidth / 2;
-    var target = event.target.parentNode;    
-    var targetChild = event.target;    
+    var target = event.target.parentNode;
+    var targetChild = event.target;
     var buttonsClickeds = (target.getAttribute("id") === "prior-button")
-                       || (target.getAttribute("id") === "next-button")
-                       || (target.getAttribute("id") === "presentation-close-button")
-                       || (targetChild.getAttribute("id") === "prior-button")
-                       || (targetChild.getAttribute("id") === "next-button")
-                       || (targetChild.getAttribute("id") === "presentation-close-button");
-    
-    if(!buttonsClickeds)
+            || (target.getAttribute("id") === "next-button")
+            || (target.getAttribute("id") === "presentation-close-button")
+            || (targetChild.getAttribute("id") === "prior-button")
+            || (targetChild.getAttribute("id") === "next-button")
+            || (targetChild.getAttribute("id") === "presentation-close-button");
+
+    if (!buttonsClickeds)
     {
-        if(touchs.pageX < halfOfScreen)
+        if (touchs.pageX < halfOfScreen)
         {
             prior(viewerId, imageListId, presentationId);
-        }else
-            {
-                next(viewerId, imageListId, presentationId);
-            }
+        } else
+        {
+            next(viewerId, imageListId, presentationId);
+        }
     }
-    
+
 }
 
 function moveImage(viewerId, imageListId, presentationId, event)
 {
     // move a imagem de acordo com a entrada do usuario
     var typePressed = null;
-    
-    if(imageViewIsOpen)
+
+    if (imageViewIsOpen)
     {
         // declaracao de variaveis
         typePressed = event.which || event.keyCode;	// utiliza o atributo which caso seja um navegador Mozilla Firefox
 
         // seta para esquerda
-        if(typePressed == 37)
+        if (typePressed == 37)
         {
             // imagem anterior
             prior(viewerId, imageListId, presentationId);
         }
 
         // seta para cima
-        if(typePressed == 38)
+        if (typePressed == 38)
         {
             // ultima imagem
             var object = document.getElementById("image-item-" + imageViewLength);
@@ -671,14 +760,14 @@ function moveImage(viewerId, imageListId, presentationId, event)
         }
 
         // seta para direita
-        if(typePressed == 39)
+        if (typePressed == 39)
         {
             // imagem posterior
             next(viewerId, imageListId, presentationId);
         }
 
         // seta para baixo
-        if(typePressed == 40)
+        if (typePressed == 40)
         {
             // primeira imagem
             var object = document.getElementById("image-item-1");
@@ -700,7 +789,7 @@ function viewById(imageId, viewerId, imageListId, presentationId)
 function view(object, viewerId, imageListId, presentationId)
 {
     // visualiza imagens de uma lista
-    if(object !== null)
+    if (object !== null)
     {
         // verifica se a variavel de quantidade de imagens foi inicializada
         if (imageViewLength === null)
@@ -862,8 +951,8 @@ function initImageViewer()
     {
         // obtem os sliders presentes na tela
         var configuration = JSON.parse(document.getElementById("presentation-configuration").innerHTML);
-        
-        document.body.addEventListener("keyup", function(){
+
+        document.body.addEventListener("keyup", function () {
             moveImage(configuration.viewerId, configuration.listPrefixId, configuration.presentationId, event);
         });
 
@@ -913,29 +1002,29 @@ function addToggleElement(id)
 function toggle(id, status)
 {
     // ativa o efeito de show/hide para elementos
-    if(exist(id))
+    if (exist(id))
     {
-        
-        if(toggleElements === null)
+
+        if (toggleElements === null)
         {
             toggleElements = [];
         }
-        
-        if(toggleElements[id] === undefined)
+
+        if (toggleElements[id] === undefined)
         {
             addToggleElement(id);
             toggleElements[id] = status;
         }
-        
-        if(toggleElements[id] === true)
+
+        if (toggleElements[id] === true)
         {
             show(id);
             toggleElements[id] = false;
-        }else
-            {
-                hide(id);
-                toggleElements[id] = true;
-            }
+        } else
+        {
+            hide(id);
+            toggleElements[id] = true;
+        }
     }
 }
 
@@ -945,7 +1034,7 @@ window.addEventListener("resize", function () {
 });
 window.addEventListener("load", function () {
     initSliders();
-    initImageViewer();    
+    initImageViewer();
 });
 
 window.addEventListener("scroll", function () {
